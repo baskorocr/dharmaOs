@@ -9,6 +9,7 @@ import axios from 'axios';
 
 function App(){
 
+
   //handler api
   const apiUrl = 'https://10.27.20.50:3001';
   const [status, setStatus] = useState(null);
@@ -57,9 +58,9 @@ function App(){
 
   return(
     
-    <div>
+    <div className="animate__animated animate__fadeIn">
 
-<img className={"logo2 d-flex justify-content-center mt-3"} src={require('../Assets/img/logo.png')} alt="" />
+    <img className={"logo2 d-flex justify-content-center mt-3"} src={require('../Assets/img/logo.png')} alt="" />
 
         <h1 className={"d-flex justify-content-center mt-2"}>Charger Station</h1>
 

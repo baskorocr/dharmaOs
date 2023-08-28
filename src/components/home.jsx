@@ -41,7 +41,7 @@ function IntervalApiFetch() {
 
 
   return (
-    <div>
+    <div className='animate__animated animate__fadeIn'>
       
       <img className={"logo"} src={require('../Assets/img/logo.png')} alt="" />
       
