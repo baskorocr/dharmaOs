@@ -1,0 +1,93 @@
+body {
+  background-color: #337CCF;
+}
+
+.code {
+  font-style: italic;
+  
+}
+.ccs{
+  margin-top: -15%;
+}
+
+.logo{
+  width: 400px;
+  margin-top: 35%;
+}
+.logo2{
+  margin: auto;
+  width: 200px;
+
+}
+
+.mt{
+  width: 400px;
+  margin-top: 35%;
+}
+
+.btnEx{
+  margin: auto;
+  width: 200px;
+  height: 300px;
+  margin-top: 30%;
+  border-radius: 30px;
+  border: 3px solid #ffffff;
+  background-color: #337CCF;
+}
+h2{
+  color: #ffffff;
+}
+h1{
+  color: #ffffff;
+}
+
+p{
+  color: #ffffff;
+}
+
+h3{
+  color: #ffffff;
+}
+
+.number{
+  margin-top: -45px;
+  border-radius: 100%;
+  background-color: #0c8542;
+  width: 50px;
+  height: 50px;
+  padding: 12px;
+  margin-left: 35%;
+  color: #ffffff;
+ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.icon{
+  width: 90%;
+  margin-top: -30%;
+  
+}
+.icon2{
+  width: 60%;
+}
+.text{
+  margin-top: -30%;
+}
+.btn2{
+  margin-top: -29%;
+}
+.type2{
+  margin-top: 20%;
+}
+.icon3{
+  width: 55%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+.chademo{
+ margin-top: 18%;
+}
+.btn3{
+  margin-top: -30%;
+}
+
+
