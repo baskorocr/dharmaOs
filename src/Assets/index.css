@@ -50,6 +50,7 @@ h3{
 }
 
 .number{
+  font-weight: bold;
   margin-top: -45px;
   border-radius: 100%;
   background-color: #0c8542;
@@ -109,26 +110,19 @@ h3{
   font-size: 25px;
 }
 
-.dashboard{
- 
-  width: 630px;
-  height: 400px;
-  background: #ffffff;
-  border: 2px;
-  border-radius: 10px;
-}
+
 .status{
   font-size: 30px;
   color: #0c8542;
 }
 .iconBt{
 
-  margin-left: -30%;
-  margin-top: -30%;
-  width: 150%;
+  margin-left: -10%;
+  margin-top: -5%;
+  width: 60%;
 }
 .line{
-  border: 1px solid #0c8542;
+  border: 2px solid #0c8542;
 }
 .btnFinish{
   margin-top: -10%;
@@ -139,6 +133,17 @@ h3{
   border: 3px solid #ffffff;
 }
 
+.styleD{
+  font-size: 17px;
+  color: #0c8542;
+  font-weight: bold;
+}
+
+.val{
+  background-color: #0c8542;
+  color: #ffffff;
+  width: 150px;
+}
 
 
 

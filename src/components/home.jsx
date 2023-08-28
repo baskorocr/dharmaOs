@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
-
+import { useNavigate } from "react-router-dom";
 
 function IntervalApiFetch() {
   const [products, setProducts] = useState([]);
@@ -9,15 +9,22 @@ function IntervalApiFetch() {
   const [status, setStatus] = useState(null);
   var i = 0;
 
+  const navigate = useNavigate();
+
   const fetchProducts = async () => {
     try {
       const response = await axios.get(apiUrl);
       console.log(response.status);
       setProducts(prevProducts => [...prevProducts, response.data]);
       setStatus(null);
-      window.location = "/about";
+
+     
+
+
+      // window.location = "/about";
     } catch (error) {
       setStatus('Error betwork');
+      navigate("/main");
     }
   };
 
