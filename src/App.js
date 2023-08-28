@@ -9,7 +9,9 @@ import Home from "./components/home";
 import Main from "./components/main";
 // import ContactUs component
 import ContactUs from "./components/ContactUs";
-  
+import Cek from "./components/cekConect";
+import Dashboard from "./components/dashCharge"; 
+
 function App() {
   return (
     <>
@@ -19,6 +21,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/main" element={<Main />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/cek" element={<Cek />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>

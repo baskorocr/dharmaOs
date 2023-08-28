@@ -10,7 +10,7 @@ import axios from 'axios';
 function App(){
 
   //handler api
-  const apiUrl = 'https://dummyjson.com/products/1';
+  const apiUrl = 'https://10.27.20.50:3001';
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
   const fetchApi = async () =>{
@@ -42,7 +42,7 @@ function App(){
     };
   }, []);
 
-  console.log(status); 
+ 
 
   //set state for button on/off
   var button1,button2,button3;

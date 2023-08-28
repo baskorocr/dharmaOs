@@ -73,10 +73,10 @@ h3{
   margin-top: -30%;
 }
 .btn2{
-  margin-top: -29%;
+  margin-top: -25%;
 }
 .type2{
-  margin-top: 20%;
+  margin-top: 25%;
 }
 .icon3{
   width: 55%;
@@ -84,10 +84,62 @@ h3{
   margin-bottom: 2%;
 }
 .chademo{
- margin-top: 18%;
+ margin-top: 23%;
 }
 .btn3{
-  margin-top: -30%;
+  margin-top: -25%;
 }
+.gif{
+  margin-top: -5%;
+  width: 75%;
+}
+
+.btnHome{
+  margin-top: -10%;
+  background-color: #0c8542;
+  border-radius: 10px;
+  width: 45%;
+  border-radius: 9px;
+  border: 3px solid #ffffff;
+}
+.back{
+  padding-top: 5%;
+  padding-bottom: 5%;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.dashboard{
+ 
+  width: 630px;
+  height: 400px;
+  background: #ffffff;
+  border: 2px;
+  border-radius: 10px;
+}
+.status{
+  font-size: 30px;
+  color: #0c8542;
+}
+.iconBt{
+
+  margin-left: -30%;
+  margin-top: -30%;
+  width: 150%;
+}
+.line{
+  border: 1px solid #0c8542;
+}
+.btnFinish{
+  margin-top: -10%;
+  background-color: #b81010;
+  border-radius: 10px;
+  width: 45%;
+  border-radius: 9px;
+  border: 3px solid #ffffff;
+}
+
+
+
 
 
