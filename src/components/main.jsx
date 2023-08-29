@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 
 function App(){
 
+  //test
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const apiUrl = 'https://enappd.com/'; // Assuming this API returns a single product
