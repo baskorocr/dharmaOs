@@ -15,7 +15,9 @@ body {
   margin-top: 35%;
 }
 .logo2{
+ 
   margin: auto;
+  
   width: 200px;
 
 }
@@ -106,8 +108,13 @@ h3{
 .back{
   padding-top: 5%;
   padding-bottom: 5%;
+  padding-left: 8%;
   color: #ffffff;
   font-size: 25px;
+}
+
+.homeImg{
+  margin-top: 1px;
 }
 
 
@@ -145,6 +152,14 @@ h3{
   width: 150px;
 }
 
+.error{
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
 
+.btnfinish{
+  margin-top: 11px;
+}
 
 

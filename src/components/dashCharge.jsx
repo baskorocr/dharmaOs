@@ -2,14 +2,13 @@ import React,{useState,useEffect} from "react";
 import ReactDOM from 'react-dom/client';
 import '../Assets/index.css';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
-
+import { useSelector } from 'react-redux';
 
 
 function App(){
-
+  const sharedVariable = useSelector((state) => state.sharedVariable);
+  console.log(sharedVariable);
   //handler api
   const apiUrl = 'https://10.27.20.50:3001';
   const [status, setStatus] = useState(null);
@@ -45,8 +44,7 @@ function App(){
 
  
 
-  //set state for button on/off
-  var button1,button2,button3;
+
 
 
   //set handle for onClick event
@@ -77,8 +75,8 @@ function App(){
   return(
     
     <div className='animate__animated animate__fadeIn'>
-
-        <img className={"logo2 d-flex justify-content-center mt-3"} src={require('../Assets/img/logo.png')} alt="" />
+{sharedVariable}
+        <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
         <h1 className={"d-flex justify-content-center mt-2"}>Dashboard Monitoring</h1>
         <div className={"mt-3 card"}>     
             
@@ -95,34 +93,34 @@ function App(){
                     </div>
                 </div>
 
-                <div className=" ms-5 me-5 d-flex  mb-3 " style={style1} >
+                <div className={" ms-5 me-5 d-flex  mb-3 "} style={style1} >
                     <div className="" style={style2} ></div>
                 </div>
                
-                <div className="line"></div>
+                <div className={"line"}></div>
 
 
-                <div class="container mt-4 ps-3 styleD pe-4">
-                    <div class="row">
-                    <div class="col-md-6">
+                <div className={"container mt-4 ps-3 styleD pe-4"}>
+                    <div className={"row"}>
+                    <div className={"col-md-6"}>
 
-                            <div class="row">
-                            <div class="col-md-6">
+                            <div className={"row"}>
+                            <div className={"col-md-6"}>
                             •Volt | Amper
                             </div>
-                            <div class="col-md-6 val">
+                            <div className={"col-md-6 val"}>
                             value
                             </div>
                             </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div className={"col-md-6"}>
 
-                            <div class="row">
-                            <div class="col-md-6">
+                            <div className={"row"}>
+                            <div className={"col-md-6"}>
                             •Max Kw
                             </div>
-                            <div class="col-md-6 val">
+                            <div className={"col-md-6 val"}>
                                 value
                             </div>
                             </div>
@@ -134,27 +132,27 @@ function App(){
 
 
 
-                <div class="container mt-2 ps-3 styleD pe-4">
-                    <div class="row">
-                    <div class="col-md-6">
+                <div className={"container mt-2 ps-3 styleD pe-4"}>
+                    <div className={"row"}>
+                    <div className={"col-md-6"}>
 
-                            <div class="row">
-                            <div class="col-md-6">
+                            <div className={"row"}>
+                            <div className={"col-md-6"}>
                             •Current Time
                             </div>
-                            <div class="col-md-6 val">
+                            <div className={"col-md-6 val"}>
                             value
                             </div>
                             </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div className={"col-md-6"}>
 
-                            <div class="row">
-                            <div class="col-md-6">
+                            <div className={"row"}>
+                            <div className={"col-md-6"}>
                             •Current Kwh
                             </div>
-                            <div class="col-md-6 val">
+                            <div className={"col-md-6 val"}>
                             value
                             </div>
                             </div>
@@ -166,27 +164,27 @@ function App(){
 
 
 
-                <div class="container mt-2 ps-3 styleD pe-4 ">
-                    <div class="row">
-                    <div class="col-md-6">
+                <div className={"container mt-2 ps-3 styleD pe-4 "}>
+                    <div className={"row"}>
+                    <div className={"col-md-6"}>
 
-                            <div class="row">
-                            <div class="col-md-6">
+                            <div className={"row"}>
+                            <div className={"col-md-6"}>
                             •Estimate
                             </div>
-                            <div class="col-md-6 val">
+                            <div className={"col-md-6 val"}>
                             value
                             </div>
                             </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div className={"col-md-6"}>
 
-                            <div class="row">
-                            <div class="col-md-6">
+                            <div className={"row"}>
+                            <div className={"col-md-6"}>
                             •Channel
                             </div>
-                            <div class="col-md-6 val">
+                            <div className={"col-md-6 val"}>
                             value
                             </div>
                             </div>
@@ -200,7 +198,7 @@ function App(){
                         <button onClick={backHome1} className="btnFinish mt-3 d-flex-justify-content-center">
                             <div className="row">
                                 <div className="col-1">
-                                <img className={"home mt-2 ms-2"}  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEftl9FRAzEMRKVOSCWQSiCVAJVAKiGdECpZZjN2RiNsWXb4CEz8F5/PfreS1orKlQ29Mh75f0AAXkTkuSj9qqr8vTwuVugGNNL+ppBXCMCdiNyp6oHPegqVdaKqx5HK9vlUUpvDz9UUALHaHkVkP1N5aSAAHyLy4Mt7AFTt4Kiqm4xSKSAHw32tQjy0eo+dfxKRNwORghoCRTAlh5pAjfzi1Luq7iKlQiAADBFDVce2JnOdANAFKlBeqR97pJPaqdP8uhFQQ6mDqm57KnUV8uqoanNtEohW8RkpXZ9FQExIyh3GPgNUVLL7dS/hLFA37hNANh+7YYuAKDGl5tjMOm7H4WvYuhYQAeEc107+ZIzOrgFQ91wCsgqFpZoByxZJpFDzqsgc3loDwPrRUg7Z1jT0jgwkgFTVZn2ILQTDNtVKGDf/FR/iJvyqesMvq+QcP7xkZ++y6X8VLnco2vpd1nBYTqWhXK/Ed4cqZ9oPHzpuzFza+Zvf5QyrtBrr6Z1MkzYEKiq1oCrY6ctF5EtE7k3O2eIbKjO8XDvWTy+pbWmm2qdCzMUphZz9U60RGEO6Lx3ilFVMAzXgqi0QlIczV05/kVbGRUArB47euQH9OYW+AQkNKjSf6gJxAAAAAElFTkSuQmCC"/>
+                                <img className={"home  btnfinish ms-3"}  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEftl9FRAzEMRKVOSCWQSiCVAJVAKiGdECpZZjN2RiNsWXb4CEz8F5/PfreS1orKlQ29Mh75f0AAXkTkuSj9qqr8vTwuVugGNNL+ppBXCMCdiNyp6oHPegqVdaKqx5HK9vlUUpvDz9UUALHaHkVkP1N5aSAAHyLy4Mt7AFTt4Kiqm4xSKSAHw32tQjy0eo+dfxKRNwORghoCRTAlh5pAjfzi1Luq7iKlQiAADBFDVce2JnOdANAFKlBeqR97pJPaqdP8uhFQQ6mDqm57KnUV8uqoanNtEohW8RkpXZ9FQExIyh3GPgNUVLL7dS/hLFA37hNANh+7YYuAKDGl5tjMOm7H4WvYuhYQAeEc107+ZIzOrgFQ91wCsgqFpZoByxZJpFDzqsgc3loDwPrRUg7Z1jT0jgwkgFTVZn2ILQTDNtVKGDf/FR/iJvyqesMvq+QcP7xkZ++y6X8VLnco2vpd1nBYTqWhXK/Ed4cqZ9oPHzpuzFza+Zvf5QyrtBrr6Z1MkzYEKiq1oCrY6ctF5EtE7k3O2eIbKjO8XDvWTy+pbWmm2qdCzMUphZz9U60RGEO6Lx3ilFVMAzXgqi0QlIczV05/kVbGRUArB47euQH9OYW+AQkNKjSf6gJxAAAAAElFTkSuQmCC"/>
                                 
                                 </div>
                                 <div className="col">

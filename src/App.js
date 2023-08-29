@@ -11,11 +11,16 @@ import Main from "./components/main";
 import ContactUs from "./components/ContactUs";
 import Cek from "./components/cekConect";
 import Dashboard from "./components/dashCharge"; 
+import Error from "./components/error";
+import store from './state/store';
+import { Provider } from 'react-redux';
+
 
 function App() {
   return (
     <>
       {/* This is the alias of BrowserRouter i.e. Router */}
+      <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,8 +28,10 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/cek" element={<Cek />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/error" element={<Error />} />
         </Routes>
       </Router>
+      </Provider>
     </>
   );
 }
