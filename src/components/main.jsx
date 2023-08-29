@@ -58,11 +58,11 @@ function App(){
     navigate("/dashboard")
   }
   const ClickButton2 = () =>{
-    dispatch(setSharedVariable("1"));
+    dispatch(setSharedVariable("2"));
     navigate("/dashboard")
   }
   const ClickButton3 = () =>{
-    dispatch(setSharedVariable("1"));
+    dispatch(setSharedVariable("3"));
     navigate("/dashboard")
   }
 
