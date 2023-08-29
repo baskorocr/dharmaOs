@@ -57,7 +57,16 @@ function App(){
     dispatch(setSharedVariable("1"));
     navigate("/dashboard")
   }
+  const ClickButton2 = () =>{
+    dispatch(setSharedVariable("1"));
+    navigate("/dashboard")
+  }
+  const ClickButton3 = () =>{
+    dispatch(setSharedVariable("1"));
+    navigate("/dashboard")
+  }
 
+  //decision if all outlet can't connect
   if(isButtonDisabled1 == true && isButtonDisabled2 == true && isButtonDisabled3 == true){
     navigate("/error")
   }
@@ -93,7 +102,7 @@ function App(){
             </button>
           </div>
           <div className={"col-4"}>
-          <button className={"btnEx"} disabled={isButtonDisabled2}>
+          <button className={"btnEx"} disabled={isButtonDisabled2} onClick={ClickButton2}>
           <div className={"number btn2"}>2</div>
               <br /><br /><br />
               <h3 className={"text"}>AC</h3>
@@ -110,7 +119,7 @@ function App(){
           </button>
           </div>
           <div className={"col-4"}>
-          <button className={"btnEx"} disabled={isButtonDisabled3}>
+          <button className={"btnEx"} disabled={isButtonDisabled3} onClick={ClickButton3}>
           <div className={"number btn3"}>3</div>
               <br /><br /><br />
               <h3 className={"text"}>CHAdeMO</h3>
