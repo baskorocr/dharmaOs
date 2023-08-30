@@ -14,6 +14,7 @@ import Dashboard from "./components/dashCharge";
 import Error from "./components/error";
 import store from './state/store';
 import { Provider } from 'react-redux';
+import PowerUp from './components/powerUp';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/cek" element={<Cek />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/error" element={<Error />} />
+          <Route path="/powerup" element={<PowerUp />} />
         </Routes>
       </Router>
       </Provider>

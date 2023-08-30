@@ -15,7 +15,7 @@ function App(){
     fetchData();
 
     // Set up an interval to fetch products every 5 seconds
-    const intervalId = setInterval(fetchData, 500);
+    const intervalId = setInterval(fetchData, 5000);
 
     // Clean up the interval when the component unmounts
     return () => {
@@ -53,7 +53,7 @@ function App(){
       <div className={"d-flex justify-content-center mt-4"}>
          <ReactLoading  className={'loading' } type={"spin"} color={"#ffffff"} height={'20%'} width={'20%'} />
       </div>
-      <h2 className={"d-flex justify-content-center mt-5"}>Start the engine</h2>
+      <h1 className={"d-flex justify-content-center mt-5"}>Start the engine</h1>
 
       
     </div>

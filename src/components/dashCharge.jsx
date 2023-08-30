@@ -42,11 +42,6 @@ function App(){
     };
   }, []);
 
- 
-
-
-
-
   //set handle for onClick event
   const backHome1 = () =>{
     window.location = "/main";
@@ -75,7 +70,7 @@ function App(){
   return(
     
     <div className='animate__animated animate__fadeIn'>
-{sharedVariable}
+
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
         <h1 className={"d-flex justify-content-center mt-2"}>Dashboard Monitoring</h1>
         <div className={"mt-3 card"}>     
@@ -185,7 +180,7 @@ function App(){
                             •Channel
                             </div>
                             <div className={"col-md-6 val"}>
-                            value
+                            {sharedVariable}
                             </div>
                             </div>
                     </div>

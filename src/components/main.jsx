@@ -11,15 +11,22 @@ import { useDispatch } from "react-redux";
 
 function App(){
 
-  //test
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const apiUrl = 'https://enappd.com/'; // Assuming this API returns a single product
+  const apiUrl = '10.10.10.10'; // Assuming this API returns a single product
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
   const [isButtonDisabled1, setIsButtonDisabled1] = useState(false);
   const [isButtonDisabled2, setIsButtonDisabled2] = useState(false);
   const [isButtonDisabled3, setIsButtonDisabled3] = useState(false);
+  
+  
+  function setButtonFalseTrue(){
+    setIsButtonDisabled1(false);
+    setIsButtonDisabled2(false);
+    setIsButtonDisabled3(false);
+   }
+  
   useEffect(() => {
     // Fetch products immediately when the component mounts
     fetchData();
@@ -33,24 +40,53 @@ function App(){
     };
   }, []);
 
+
    async function fetchData(){
     
     axios.get(apiUrl)
     .then(response => {
-      setData(response.status);
+      setData(response.data);
+      //real coding
       //setIs dipindah ke validasi outlite/mesin
-      setIsButtonDisabled1(true);
+      // if(response.data[0]['online'] == true){
+      //   setIsButtonDisabled1(false);
+      // }
+      // elseif(response.data[0]['online'] == false)
+      // {
+      //   setIsButtonDisabled1(true);
+      // }
+
+      // elseif(response.data[1]['online'] == false){
+      //   setIsButtonDisabled2(false);
+      // }
+      // elseif(response.data[1]['online'] == false)
+      // {
+      //   setIsButtonDisabled1(true);
+      // }
+      // elseif(response.data[2]['online'] == true){
+      //   setIsButtonDisabled3(false);
+      // }
+      // elseif(response.data[2]['online'] == false)
+      // {
+      //   setIsButtonDisabled1(true);
+      // }
+     
+
+      
+      //sementara, harus dihapus
+      setIsButtonDisabled1(false);
       setIsButtonDisabled2(false);
       setIsButtonDisabled3(false);
+      
     })
     .catch(error => {
       console.log(error);
-      setIsButtonDisabled1(false);
-      setIsButtonDisabled2(true);
-      setIsButtonDisabled3(true);
+      setButtonFalseTrue();
     });
   }
 
+
+ 
 
   //set handle for onClick event
   const ClickButton1 = () =>{
@@ -67,7 +103,7 @@ function App(){
   }
 
   //decision if all outlet can't connect
-  if(isButtonDisabled1 == true && isButtonDisabled2 == true && isButtonDisabled3 == true){
+  if(isButtonDisabled1 === true && isButtonDisabled2 == true && isButtonDisabled3 == true){
     navigate("/error")
   }
 

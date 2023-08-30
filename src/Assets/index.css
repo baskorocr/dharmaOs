@@ -61,6 +61,8 @@ h3{
   padding: 12px;
   margin-left: 35%;
   color: #ffffff;
+  border: 2px solid #ffffff;
+
  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -160,6 +162,10 @@ h3{
 
 .btnfinish{
   margin-top: 11px;
+}
+
+.powerUp{
+  width: 70%;
 }
 
 

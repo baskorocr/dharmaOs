@@ -52,13 +52,13 @@ function App(){
 
 <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
-        <h1 className={"d-flex justify-content-center mt-2"}>Outlite Not Detected</h1>
+        <h1 className={"d-flex justify-content-center mt-2"}>Power Up Machine</h1>
         <div className={"d-flex justify-content-center"}>
-            <img src={require('../Assets/img/error.png')} className={"error"} alt="" />
+            <img src={require('../Assets/img/powerUp.gif')} className={"powerUp"} alt="" />
             
 
         </div>
-        <h1 className={"d-flex justify-content-center mt-2"}>Please cek your machine</h1>
+        <h1 className={"d-flex justify-content-center mt-2"}>Checking adaptor connecting</h1>
         
      
     
