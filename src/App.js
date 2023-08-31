@@ -24,8 +24,8 @@ function App() {
       <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/main" element={<Main />} />
+          <Route path="/" element={<Main />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/cek" element={<Cek />} />
           <Route path="/dashboard" element={<Dashboard />} />

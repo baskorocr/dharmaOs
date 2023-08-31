@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom/client';
 import '../Assets/index.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 
 
 
 
 
 function App(){
-
+  const navigate = useNavigate();
+  const sharedVariable = useSelector((state) => state.sharedVariable);
   //handler api
-  const apiUrl = 'https://10.27.20.50:3001';
+  const apiUrl = 'https://dummyjson.com/products/1';
+  console.log(apiUrl);
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
   const fetchApi = async () =>{
@@ -19,7 +24,7 @@ function App(){
     .then(response => {
       setStatus(response.data);
       
-
+      navigate("/dashboard");
     })
     .catch(error => {
       setError(error);
@@ -48,7 +53,7 @@ function App(){
 
   return(
     
-    <div className='animate__animated animate__fadeIn'>
+    <div className='animate__animated animate__fadeIn '>
 
 <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 

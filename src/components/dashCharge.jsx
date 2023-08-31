@@ -8,9 +8,10 @@ import { useSelector } from 'react-redux';
 
 function App(){
   const sharedVariable = useSelector((state) => state.sharedVariable);
-  console.log(sharedVariable);
+  
   //handler api
-  const apiUrl = 'https://10.27.20.50:3001';
+  const apiUrl = 'https://10.27.20.50:3001/'+sharedVariable+'/api';
+
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
   const fetchApi = async () =>{
@@ -44,7 +45,7 @@ function App(){
 
   //set handle for onClick event
   const backHome1 = () =>{
-    window.location = "/main";
+    window.location = "/home";
   }
   
   const val = 50
@@ -65,11 +66,11 @@ function App(){
     width: val+'%',
   }
 
-  
+  console.log(apiUrl);
 
   return(
     
-    <div className='animate__animated animate__fadeIn'>
+    <div className='animate__animated animate__fadeIn '>
 
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
         <h1 className={"d-flex justify-content-center mt-2"}>Dashboard Monitoring</h1>

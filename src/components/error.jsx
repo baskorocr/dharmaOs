@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import '../Assets/index.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,22 +11,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function App(){
 
+  const navigate = useNavigate();
   //handler api
-  const apiUrl = 'https://10.27.20.50:3001';
+  const apiUrl = 'http://10.20.27.50:3001/state';
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
-  const fetchApi = async () =>{
-    axios.get(apiUrl)
-    .then(response => {
-      setStatus(response.data);
-      
-
-    })
-    .catch(error => {
-      setError(error);
-  
-    });
-  }
 
 
   //set background handling
@@ -44,19 +34,36 @@ function App(){
   }, []);
 
 
+  const fetchApi = async () =>{
+    axios.get(apiUrl)
+    .then(response => {
+      //masih dummy response. butuh validation
+      //ketika outlite true;
+      navigate('/home');
+      
+
+    })
+    .catch(error => {
+      setError(error);
+  
+    });
+  }
+
+
+  
+
+
   
 
   return(
     
-    <div className='animate__animated animate__fadeIn'>
+    <div className='animate__animated animate__fadeIn '>
 
 <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
         <h1 className={"d-flex justify-content-center mt-2"}>Outlite Not Detected</h1>
-        <div className={"d-flex justify-content-center"}>
+        <div className={"d-flex justify-content-center divError"}>
             <img src={require('../Assets/img/error.png')} className={"error"} alt="" />
-            
-
         </div>
         <h1 className={"d-flex justify-content-center mt-2"}>Please cek your machine</h1>
         

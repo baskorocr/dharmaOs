@@ -51,14 +51,14 @@ function App(){
 
   //set handle for onClick event
   const backHome1 = () =>{
-    window.location = "/main";
+    window.location = "/home";
   }
 
   
 
   return(
     
-    <div className='animate__animated animate__fadeIn'>
+    <div className='animate__animated animate__fadeIn '>
 
 <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
