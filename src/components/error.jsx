@@ -39,7 +39,7 @@ function App(){
     .then(response => {
       //masih dummy response. butuh validation
       //ketika outlite true;
-      navigate('/home');
+   
       
 
     })
@@ -50,16 +50,11 @@ function App(){
   }
 
 
-  
-
-
-  
-
   return(
     
     <div className='animate__animated animate__fadeIn '>
 
-<img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
+        <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
         <h1 className={"d-flex justify-content-center mt-2"}>Outlite Not Detected</h1>
         <div className={"d-flex justify-content-center divError"}>

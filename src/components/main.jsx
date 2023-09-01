@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 function App(){
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const apiUrl = 'http://10.20.27.50:3001/swagger/'; // Assuming this API returns a single product
+  const apiUrl = 'http://10.20.27.50:3001/state'; // Assuming this API returns a single product
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
+    fetchData();
     // Fetch products immediately when the component mounts
-
     // Set up an interval to fetch products every 5 seconds
     const intervalId = setInterval(fetchData, 5000);
 
@@ -26,17 +26,21 @@ function App(){
 
   async function fetchData(){
     
-    try {
-      const response = await axios.get(apiUrl);
-      console.log(response.status);
-      setProducts(prevProducts => [...prevProducts, response.data]);
-      navigate("/home");
-  
-      // window.location = "/about";
-    } catch (error) {
-      setStatus('Error betwork');
+    axios.get(apiUrl)
+    .then(response => {
+      //delete !.
+      if(response.data['online'] === !false){
+        navigate('error');
+      }
+      else{
+        navigate('/home');
+      }
       
-    }
+    })
+    .catch(error => {
+      console.log(error);
+      navigate('/error')
+    });
   }
   
 

@@ -14,19 +14,22 @@ function App(){
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const apiUrl = 'http://10.20.27.50:3001/state'; // Assuming this API returns a single product
+  const apiUrl = 'http://10.10.10.10'; // Assuming this API returns a single product
   const [data, setData] = useState([]);
   const [isButtonDisabled1, setIsButtonDisabled1] = useState(true);
   const [isButtonDisabled2, setIsButtonDisabled2] = useState(true);
   const [isButtonDisabled3, setIsButtonDisabled3] = useState(true);
 
   
+  
   useEffect(() => {
     // Fetch products immediately when the component mounts
     fetchData();
-
+    console.log("dsadsa");
     // Set up an interval to fetch products every 5 seconds
     const intervalId = setInterval(fetchData, 1000);
+    //decision if all outlet can't connect
+   
 
     // Clean up the interval when the component unmounts
     return () => {
@@ -36,21 +39,27 @@ function App(){
 
 
    async function fetchData(){
-    
+    setIsButtonDisabled1(false);
     axios.get(apiUrl)
     .then(response => {
-   
-      if(response.data['online']==false){
-        setIsButtonDisabled1(false);
+     //hapus ! 
+      if(response.data['online']== !false){
+        setIsButtonDisabled1(true);
         setIsButtonDisabled2(true);
         setIsButtonDisabled3(true);
+        navigate("/error"); 
+        
       }
+      
       
     })
     .catch(error => {
       console.log(error);
-      navigate('/error')
+
+      //navigate('/error')
     });
+
+   
     
   }
 
@@ -72,10 +81,7 @@ function App(){
     navigate("/powerup")
   }
 
-  //decision if all outlet can't connect
-  if(isButtonDisabled1 === true && isButtonDisabled2 == true && isButtonDisabled3 == true){
-    navigate("/error")
-  }
+  
 
   
   

@@ -16,21 +16,10 @@ function App(){
   const sharedVariable = useSelector((state) => state.sharedVariable);
   //handler api
   const apiUrl = 'https://dummyjson.com/products/1';
-  console.log(apiUrl);
+ console.log(apiUrl);
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
-  const fetchApi = async () =>{
-    axios.get(apiUrl)
-    .then(response => {
-      setStatus(response.data);
-      
-      navigate("/dashboard");
-    })
-    .catch(error => {
-      setError(error);
   
-    });
-  }
 
 
   //set background handling
@@ -47,6 +36,24 @@ function App(){
       clearInterval(intervalId);
     };
   }, []);
+
+  
+  
+  const fetchApi = async () =>{
+    axios.get(apiUrl)
+    .then(response => {
+      setStatus(response.data);
+      
+      navigate("/dashboard");
+    })
+    .catch(error => {
+      setError(error);
+  
+    });
+  }
+
+
+  
 
 
   
