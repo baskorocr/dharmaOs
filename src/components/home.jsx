@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import '../Assets/index.css';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
 import { setSharedVariable } from '../state/action';
 
 import { useDispatch } from "react-redux";
@@ -34,7 +33,7 @@ function App(){
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  });
 
 
    async function fetchData(){
@@ -42,7 +41,7 @@ function App(){
     axios.get(apiUrl)
     .then(response => {
      //hapus ! 
-      if(response.data['online']== !false){
+      if(response.data['online'] === !false){
         setIsButtonDisabled1(true);
         setIsButtonDisabled2(true);
         setIsButtonDisabled3(true);

@@ -1,6 +1,6 @@
 
 // importing components from react-router-dom package
-import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
   
 // import Home component
@@ -15,6 +15,7 @@ import Error from "./components/error";
 import store from './state/store';
 import { Provider } from 'react-redux';
 import PowerUp from './components/powerUp';
+import Untwisted from './components/untwist';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/error" element={<Error />} />
           <Route path="/powerup" element={<PowerUp />} />
+          <Route path="/untwist" element={<Untwisted />} />
         </Routes>
       </Router>
       </Provider>

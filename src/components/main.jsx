@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 function App(){
   const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
   const apiUrl = 'http://10.20.27.50:3001/state'; // Assuming this API returns a single product
   const [status, setStatus] = useState(null);
 
@@ -20,7 +19,7 @@ function App(){
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  });
 
   
 
@@ -29,7 +28,7 @@ function App(){
     axios.get(apiUrl)
     .then(response => {
       //delete !.
-      if(response.data['online'] == !false){
+      if(response.data['online'] === !false){
         navigate('error');
       }
       else{

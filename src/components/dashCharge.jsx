@@ -41,7 +41,7 @@ function App(){
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  });
 
   //set handle for onClick event
   const backHome1 = () =>{

@@ -55,11 +55,11 @@ function App(){
 
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
-        <h1 className={"d-flex justify-content-center mt-2"}>Outlite Not Detected</h1>
+        <h1 className={"d-flex justify-content-center mt-2"}>Turn Left Button</h1>
         <div className={"d-flex justify-content-center divError"}>
             <img src={require('../Assets/img/error.png')} className={"error"} alt="" />
         </div>
-        <h1 className={"d-flex justify-content-center mt-2"}>Please cek your machine</h1>
+        <h1 className={"d-flex justify-content-center mt-2"}>To Stop Emergency Mode</h1>
         
      
     

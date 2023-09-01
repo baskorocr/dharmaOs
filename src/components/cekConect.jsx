@@ -3,11 +3,8 @@ import '../Assets/index.css';
 import axios from 'axios';
 
 
-
-
-
-
 function App(){
+
 
   //handler api
   const apiUrl = 'https://10.27.20.50:3001';
@@ -40,13 +37,7 @@ function App(){
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
-
- 
-
-  //set state for button on/off
-  var button1,button2,button3;
-
+  });
 
   //set handle for onClick event
   const backHome1 = () =>{
