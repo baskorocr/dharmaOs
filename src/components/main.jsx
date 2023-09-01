@@ -29,7 +29,7 @@ function App(){
     axios.get(apiUrl)
     .then(response => {
       //delete !.
-      if(response.data['online'] === !false){
+      if(response.data['online'] == !false){
         navigate('error');
       }
       else{

@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
-import ReactDOM from 'react-dom/client';
+
 import '../Assets/index.css';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
