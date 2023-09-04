@@ -127,7 +127,33 @@ function App(){
   }
 
   
-
+  const btn = {
+    margin: "auto",
+    width: "200px",
+    height: "300px",
+    marginTop: "30%",
+    borderRadius: "30px",
+    border: "3px solid #ffffff",
+    backgroundColor: "#337CCF"
+  }
+  const btn1Connect ={
+    margin: "auto",
+    width: "200px",
+    height: "300px",
+    marginTop: "30%",
+    borderRadius: "30px",
+    border: "3px solid #0c8542",
+    backgroundColor: "#337CCF"
+  }
+  const btn2Connect ={
+    margin: "auto",
+    width: "200px",
+    height: "300px",
+    marginTop: "30%",
+    borderRadius: "30px",
+    border: "3px solid #0c8542",
+    backgroundColor: "#337CCF"
+  }
   
   
 
@@ -143,16 +169,20 @@ function App(){
 
         <div className={"row "}>
           <div className={"col-4"}>
-            <button className={"btnEx"} disabled={isButtonDisabled1} onClick={ClickButton1}>
+            <button style={ data === 1 ? (btn1Connect): (btn)} disabled={isButtonDisabled1} onClick={ClickButton1}>
               <div className={"number"}>1</div>
               <br /><br /><br />
-              <h3 className={"text"}>CSS</h3>
+              <h3 className={"text"}>CCS</h3>
               <img src={require('../Assets/img/ccs.png')} className={"icon"} alt="" />
               {
                 isButtonDisabled1 ? (
                   <p className={"code ccs"}>Not Available</p>
                 ) : (
-                  <p className={"code ccs"}>Available</p>
+                  data === 1 ? (
+                    <p className={"code ccs"}  >EV Connected</p>
+                  ) : (
+                    <p className={"code ccs"}>Available</p>
+                  )
                 )
               }
              
@@ -160,7 +190,7 @@ function App(){
             </button>
           </div>
           <div className={"col-4"}>
-          <button className={"btnEx"} disabled={isButtonDisabled2} onClick={ClickButton2}>
+          <button style={ data === 2 ? (btn2Connect): (btn)} disabled={isButtonDisabled2} onClick={ClickButton2}>
           <div className={"number btn2"}>2</div>
               <br /><br /><br />
               <h3 className={"text"}>AC</h3>
@@ -169,9 +199,17 @@ function App(){
                 isButtonDisabled2 ? (
                   <p className={"code type2"}>Not Available</p>
                 ) : (
-                  <p className={"code type2"}> Available</p>
+                  data === 2 ? (
+                    <p className={"code type2"}>EV Connected</p>
+                  ) : (
+                    <p className={"code type2"}>Available</p>
+                  )
+                  
                 )
+
+                
               }
+              
 
 
           </button>
