@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from "react";
 import '../Assets/index.css';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { setSharedVariable } from '../state/action';
-
+import axios from 'axios';
 import { useDispatch } from "react-redux";
 
 
@@ -12,67 +11,115 @@ function App(){
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const apiUrl = 'http://10.10.10.10'; // Assuming this API returns a single product
+  const apiUrl = 'http://10.20.27.50:3001/state'; // Assuming this API returns a single product
   const [data, setData] = useState([]);
   const [isButtonDisabled1, setIsButtonDisabled1] = useState(true);
   const [isButtonDisabled2, setIsButtonDisabled2] = useState(true);
   const [isButtonDisabled3, setIsButtonDisabled3] = useState(true);
 
+  const [error, setError] = useState(null);
   
-  
+ 
+
   useEffect(() => {
-    // Fetch products immediately when the component mounts
-    fetchData();
-    console.log("dsadsa");
-    // Set up an interval to fetch products every 5 seconds
-    const intervalId = setInterval(fetchData, 1000);
-    //decision if all outlet can't connect
-   
+    let isMounted = true;
 
-    // Clean up the interval when the component unmounts
-    return () => {
-      clearInterval(intervalId);
-    };
-  });
+    const fetchData = async () => {
+      try {
+        axios.get(apiUrl)
+          .then(response => {
+           
+            if(response.data.length == 2){
+              
+              if(response.data[0]['online'] && response.data[1]['online']){
+                setIsButtonDisabled1(false);
+                setIsButtonDisabled2(false);
+                setIsButtonDisabled3(true);
+              }
+              else if(response.data[0]['online'] === true && response.data[1]['online'] === false){
+                setIsButtonDisabled1(false);
+                setIsButtonDisabled2(true);
+                setIsButtonDisabled3(true);
+              }
+              else if(response.data[0]['online'] === false && response.data[1]['online'] === true){
+                setIsButtonDisabled1(true);
+                setIsButtonDisabled2(false);
+                setIsButtonDisabled3(true);
+              }
+              else if(response.data[0]['online'] === false && response.data[1]['online'] === false){
+                setIsButtonDisabled1(true);
+                setIsButtonDisabled2(true);
+                setIsButtonDisabled3(true);
+                navigate("/error");
+              }
+            }
+            if(response.data[0]['testEV'] === true){
+              setData(1);
+            }
+            else if(response.data[1]['testEV'] === true){
+              setData(2);
+            }
+            else if(response.data[1]['testEV'] === false || response.data[0]['testEV'] === false){
+              setData(4);
 
+            }
 
-   async function fetchData(){
-    setIsButtonDisabled1(false);
-    axios.get(apiUrl)
-    .then(response => {
-     //hapus ! 
-      if(response.data['online'] === !false){
-        setIsButtonDisabled1(true);
-        setIsButtonDisabled2(true);
-        setIsButtonDisabled3(true);
-        navigate("/error"); 
+            // else if(response.data.length == 3){
+
+            // }
+
+          })
+          .catch(error => {
+            setError(error);
         
+          });
+          // Replace with your API endpoint
+      
+        setTimeout(() => fetchData(),5000);
+      } catch (err) {
+        console.log(err)
+        if (isMounted) {
+          setError(err);
+        }
       }
-      
-      
-    })
-    .catch(error => {
-      console.log(error);
+    };
 
-      //navigate('/error')
-    });
+    // Fetch data when the component mounts
+    fetchData();
 
-   
-    
+    return () => {
+      isMounted = false; // Prevent state updates on unmounted component
+    };
+  }, []);
+
+
+  if (error) {
+    // If there's an error, redirect to the error page
+    navigate("/error")
   }
-
+  
 
 
  
 
   //set handle for onClick event
   const ClickButton1 = () =>{
-    dispatch(setSharedVariable("1"));
-    navigate("/powerup")
+    if(data === 1){
+      dispatch(setSharedVariable("1"));
+      navigate("/powerup");
+    }
+    else{
+      navigate("/cek");
+    }
   }
   const ClickButton2 = () =>{
-    dispatch(setSharedVariable("2"));
-    navigate("/powerup")
+    if(data === 2){
+      dispatch(setSharedVariable("2"));
+      navigate("/powerup");
+    }
+    else{
+      navigate("/cek");
+    }
   }
   const ClickButton3 = () =>{
     dispatch(setSharedVariable("3"));
@@ -151,7 +198,10 @@ function App(){
       
         </div>
 
-        <h2 className={"d-flex justify-content-center mt-4"}> Please plug-in and select outlet to start</h2>
+        {data === 1 &&  <h2 className={"d-flex justify-content-center mt-4"}> CCS Has Been Connected </h2>}
+        {data === 2 && <h2 className={"d-flex justify-content-center mt-4"}> AC Has Been Connected</h2>}
+        {data === 4 && <h2 className={"d-flex justify-content-center mt-4"}> Please plug-in and select outlet to start</h2>}     
+       
         
      
     
