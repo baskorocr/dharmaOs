@@ -298,9 +298,9 @@ function App(){
       
         </div>
 
-        {data === 1 &&  <h2 className={"d-flex justify-content-center mt-4"}> CCS Has Been Connected </h2>}
-        {data === 2 && <h2 className={"d-flex justify-content-center mt-4"}> AC Has Been Connected</h2>}
-        {data === 4 && <h2 className={"d-flex justify-content-center mt-4"}> Please plug-in and select outlet to start</h2>}     
+        {plug === 1 &&  <h2 className={"d-flex justify-content-center mt-4"}> CCS Has Been Connected </h2>}
+        {plug === 2 && <h2 className={"d-flex justify-content-center mt-4"}> AC Has Been Connected</h2>}
+        {plug === 0 && <h2 className={"d-flex justify-content-center mt-4"}> Please plug-in and select outlet to start</h2>}     
        
         
      
