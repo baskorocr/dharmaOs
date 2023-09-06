@@ -33,6 +33,7 @@ function App() {
           <Route path="/error" element={<Error />} />
           <Route path="/powerup" element={<PowerUp />} />
           <Route path="/untwist" element={<Untwisted />} />
+          
         </Routes>
       </Router>
       </Provider>

@@ -2,6 +2,10 @@ body {
   background-color: #337CCF;
 }
 
+.top{
+  margin-top:1%
+}
+
 .code {
   font-style: italic;
   
@@ -34,7 +38,7 @@ body {
   margin-top: 30%;
   border-radius: 30px;
   border: 3px solid #ffffff;
-  background-color: #337CCF;
+  background-color: #337acb;
 }
 h2{
   color: #ffffff;
@@ -53,7 +57,7 @@ h3{
 
 .number{
   font-weight: bold;
-  margin-top: -45px;
+  
   border-radius: 100%;
   background-color: #0c8542;
   width: 50px;
@@ -74,11 +78,13 @@ h3{
 .icon2{
   width: 60%;
 }
-.text{
-  margin-top: -30%;
+
+.btn1{
+  margin-top:-20%;
+  
 }
 .btn2{
-  margin-top: -25%;
+  margin-top: -20%;
 }
 .type2{
   margin-top: 25%;
@@ -92,7 +98,7 @@ h3{
  margin-top: 23%;
 }
 .btn3{
-  margin-top: -25%;
+  margin-top: -20%;
 }
 .gif{
   margin-top: -5%;

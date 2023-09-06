@@ -102,7 +102,7 @@ function App(){
 
                             <div className={"row"}>
                             <div className={"col-md-6"}>
-                            •Volt | Amper
+                            •Volt | Ampere
                             </div>
                             <div className={"col-md-6 val"}>
                             value
@@ -114,7 +114,7 @@ function App(){
 
                             <div className={"row"}>
                             <div className={"col-md-6"}>
-                            •Max Kw
+                            •Max kW
                             </div>
                             <div className={"col-md-6 val"}>
                                 value
@@ -146,7 +146,7 @@ function App(){
 
                             <div className={"row"}>
                             <div className={"col-md-6"}>
-                            •Current Kwh
+                            •Current kWh
                             </div>
                             <div className={"col-md-6 val"}>
                             value
@@ -198,7 +198,7 @@ function App(){
                                 
                                 </div>
                                 <div className="col">
-                                <h5 className={"back"}>Finished Charge</h5>
+                                <h5 className={"back"}>Finish Charging</h5>
                                 </div>
                             </div>
                         </button>

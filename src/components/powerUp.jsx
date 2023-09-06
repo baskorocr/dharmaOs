@@ -70,7 +70,7 @@ function App(){
             
 
         </div>
-        <h1 className={"d-flex justify-content-center mt-2"}>Checking adaptor connecting</h1>
+        <h1 className={"d-flex justify-content-center mt-2"}>Checking adaptor connection</h1>
         
      
     

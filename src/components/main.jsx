@@ -3,9 +3,9 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from "react-router-dom";
 
 
-function App(){
+function Main(){
   const navigate = useNavigate();
-  const apiUrl = 'http://10.20.27.50:3001/swagger/'; // Assuming this API returns a single product
+  const apiUrl = 'http://10.20.27.100/'; // Assuming this API returns a single product
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -13,12 +13,12 @@ function App(){
     const fetchData = async () => {
       try {
         await fetch(apiUrl); // Replace with your API endpoint
-        setTimeout(() =>
-        setData(true),
-        setError(null)
-        ,10000);
+        setData(true);
+        setTimeout(() => fetchData(),5000);
+        
       } catch (err) {
         setError(err);
+        setTimeout(() => fetchData(),5000);
       }
     };
 
@@ -30,6 +30,7 @@ function App(){
     // If data is successfully fetched, redirect to the home page
     navigate("/home")
   }
+
 
   return (
     <div className='animate__animated animate__fadeIn '>
@@ -51,4 +52,4 @@ function App(){
 
  
 
-export default App;
+export default Main;

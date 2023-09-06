@@ -12,42 +12,58 @@ function App(){
 
   const navigate = useNavigate();
   //handler api
-  const apiUrl = 'http://10.20.27.50:3001/state';
-  const [status, setStatus] = useState(null);
+  const apiUrl = 'http://10.20.27.100/api/system/iostate';
+
   const [error, setError] = useState(null);
 
-
-  //set background handling
   useEffect(() => {
-    // Fetch products immediately when the component mounts
-    fetchApi();
+    let isMounted = true;
    
+   
+    const fetchData = async () => {
     
-    // Set up an interval to fetch products every 5 seconds
-    const intervalId = setInterval(fetchApi, 2000);
 
-    // Clean up the interval when the component unmounts
-    return () => {
-      clearInterval(intervalId);
-    };
-  });
+      try {
+        axios.get(apiUrl)
+          .then(response => {
 
+          
+          
+           if(response.data['io'][48]['value'] !== 0){
+            navigate('/home');
+           }
+           else{
+            setTimeout(() => fetchData(),1000);
+           }
+          
+            // else if(response.data.length == 3){
 
-  const fetchApi = async () =>{
-    axios.get(apiUrl)
-    .then(response => {
-      //masih dummy response. butuh validation
-      //ketika outlite true;
-   
+            // }
+
+          })
+          .catch(error => {
+            setError(error);
+        
+          });
+          // Replace with your API endpoint
       
+        
+      } catch (err) {
+        console.log(err)
+        if (isMounted) {
+          setError(err);
+        }
+      }
+    };
 
-    })
-    .catch(error => {
-      setError(error);
-  
-    });
-  }
+    // Fetch data when the component mounts
+    fetchData();
 
+    return () => {
+      isMounted = false; // Prevent state updates on unmounted component
+    };
+  }, []);
+ 
 
   return(
     
