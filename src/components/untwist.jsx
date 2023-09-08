@@ -15,6 +15,7 @@ function App(){
   const apiUrl = 'http://10.20.27.100/api/system/iostate';
 
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     let isMounted = true;
@@ -67,7 +68,7 @@ function App(){
 
   return(
     
-    <div className='animate__animated animate__fadeIn '>
+    <div className='animate__animated animate__fadeIn top'>
 
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 

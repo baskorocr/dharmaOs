@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from "react";
 import '../Assets/index.css';
 import axios from 'axios';
-
+import { useNavigate } from "react-router-dom";
+import controlEme from "./controlEme";
 
 function App(){
 
-
+  const navigate = useNavigate();
   //handler api
   const apiUrl = 'https://10.27.20.50:3001';
   const [status, setStatus] = useState(null);
@@ -24,24 +25,21 @@ function App(){
   }
 
 
-  //set background handling
   useEffect(() => {
-    // Fetch products immediately when the component mounts
-    fetchApi();
-   
-    
-    // Set up an interval to fetch products every 5 seconds
-    const intervalId = setInterval(fetchApi, 2000);
+    // Delay for 2 seconds (2000 milliseconds)
+    const delay = 3000;
 
-    // Clean up the interval when the component unmounts
-    return () => {
-      clearInterval(intervalId);
-    };
-  });
+    const timer = setTimeout(() => {
+      controlEme(navigate);
+    }, delay);
+
+    // Clear the timer if the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
 
   //set handle for onClick event
   const backHome1 = () =>{
-    window.location = "/home";
+    navigate("/home");
   }
 
   
@@ -61,13 +59,13 @@ function App(){
         <div className={"d-flex justify-content-center"}>
 
         <button onClick={backHome1} className="btnHome">
-        <div className="row">
-            <div className="col-1 homeImg">
-            <img className={"mt-1 ms-2"} alt="cek" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAX5JREFUWEft2GtugzAMAOBYMfdobzJusp5k7Um2m4ybjHvUyFOyhgaIyatIaIK/OOSrk9hRQe3sgZ151P8DMfNJDcOnzbTWFwDoa7JelaEH5scD9ErrtgZVDApgnKsKVQQKZuaPc3qoilHZoCCG+aIQezUM37WoLJCEgabpTGYe76tQyaAYxm2gWlQSKBXzClQUlIupRa2CSjE1KBFUiylFBUGvwpSgFqBgBWZu3dEu7VOpbWYCktoBIEY3fwqUiXgWt6joUxCRaZSu/I9jNwSZOXpAPLvJdg4ydxuid6sF+BjVgSVjE2fiw09netv8GjJZMuabHYr45cfJx95bb3/JVq4dS5rWZ38yHyRtg3wQkWmebymbWCnVAWI7Hn/hR/rfKgE9T4pL+1wnLPdWGRpBUtqliQ9QbK8cGToyZC/yCbVkq1MWbLSJBTEWNmmoaYXxfr/6/Sw2Q9Z75hs0zTU0Zv1OTWT+RDBtQmqiWQ4bvIKxPT3/i9uOOECx/P4CDROgNG2o86UAAAAASUVORK5CYII="/>
-            </div>
-            <div className="col">
-            <h5 className={"back"}>Back To Home</h5>
-            </div>
+            <div className="row">
+                <div className={"col-2"} id={"cekImg"}>
+                <img className={"imgCek"}  alt="cek" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAX5JREFUWEft2GtugzAMAOBYMfdobzJusp5k7Um2m4ybjHvUyFOyhgaIyatIaIK/OOSrk9hRQe3sgZ151P8DMfNJDcOnzbTWFwDoa7JelaEH5scD9ErrtgZVDApgnKsKVQQKZuaPc3qoilHZoCCG+aIQezUM37WoLJCEgabpTGYe76tQyaAYxm2gWlQSKBXzClQUlIupRa2CSjE1KBFUiylFBUGvwpSgFqBgBWZu3dEu7VOpbWYCktoBIEY3fwqUiXgWt6joUxCRaZSu/I9jNwSZOXpAPLvJdg4ydxuid6sF+BjVgSVjE2fiw09netv8GjJZMuabHYr45cfJx95bb3/JVq4dS5rWZ38yHyRtg3wQkWmebymbWCnVAWI7Hn/hR/rfKgE9T4pL+1wnLPdWGRpBUtqliQ9QbK8cGToyZC/yCbVkq1MWbLSJBTEWNmmoaYXxfr/6/Sw2Q9Z75hs0zTU0Zv1OTWT+RDBtQmqiWQ4bvIKxPT3/i9uOOECx/P4CDROgNG2o86UAAAAASUVORK5CYII="/>
+                </div>
+                <div className={"col-8"}>
+                <h5 className={"back"}>Back To Home</h5>
+                </div>
             </div>
         </button>
 

@@ -3,7 +3,9 @@ body {
 }
 
 .top{
-  margin-top:1%
+
+ margin-right: 20px;
+  
 }
 
 .code {
@@ -11,7 +13,7 @@ body {
   
 }
 .ccs{
-  margin-top: -10%;
+  margin-top: 32%;
 }
 
 .logo{
@@ -57,105 +59,174 @@ h3{
 
 .number{
   font-weight: bold;
-  
   border-radius: 100%;
   background-color: #0c8542;
   width: 50px;
   height: 50px;
   padding: 12px;
-  margin-left: 37%;
+  margin-left: 40%;
   color: #ffffff;
   border: 2px solid #ffffff;
 
  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
+#ccsType{
+  width: 65%;
+  height: 50%;
+  margin-top: 5%;
+  margin-left: 1px;
+}
+#ccsAC{
+  width: 72%;
+  height: 36%;
+  margin-top: 5%;
+  margin-left: 1px;
+}
 .icon{
   width: 90%;
   margin-top: -30%;
+  margin-left: -5%;
   
 }
+
+.loading{
+  display: flex;
+  justify-content: center;
+}
+
+#customCard{
+  width: 820px;
+  height: 435px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
 .icon2{
   width: 60%;
 }
 
 .btn1{
-  margin-top:-20%;
+  margin-top:-15%;
+  
   
 }
 .btn2{
-  margin-top: -20%;
+  margin-top: -12%;
 }
 .type2{
-  margin-top: 25%;
+  margin-top: 60%;
+  padding-bottom: 10%;
 }
 .icon3{
-  width: 55%;
+  width: 60%;
   margin-top: 5%;
   margin-bottom: 2%;
 }
 .chademo{
- margin-top: 23%;
+ margin-top: 62%;
 }
 .btn3{
   margin-top: -20%;
 }
 .gif{
-  margin-top: -5%;
-  width: 75%;
+  margin-top: -15%;
+  width: 90%;
+}
+
+#cekImg{
+  margin-top: -5px;
+  padding-left: 60px;
+  margin-bottom: 5px;
+}
+.imgCek{
+  width: 400px;
 }
 
 .btnHome{
-  margin-top: -10%;
+  width: 350px;
+  height: 80px;
+  margin-top: -11%;
   background-color: #0c8542;
   border-radius: 10px;
-  width: 45%;
+ 
   border-radius: 9px;
   border: 3px solid #ffffff;
+
+
 }
 .back{
-  padding-top: 5%;
-  padding-bottom: 5%;
+ 
   padding-left: 8%;
   color: #ffffff;
   font-size: 25px;
 }
 
-.homeImg{
-  margin-top: 2px;
+
+
+#homeImg{
+ 
+  padding-left: 65px;
+  width: 75px;
+  height: 40px;
+  padding-top: 5px;
+
 }
+#back{
+  padding-top: 10px;
+  
+ 
+}
+
+
 
 
 .status{
+ 
   font-size: 30px;
   color: #0c8542;
 }
+.col-2{
+  display: flex;
+  justify-content: center;
+}
 .iconBt{
 
-  margin-left: -10%;
-  margin-top: -5%;
+  margin-left: -25%;
+  margin-top: -9%;
   width: 60%;
 }
 .line{
   border: 2px solid #0c8542;
 }
 .btnFinish{
-  margin-top: -10%;
+ 
   background-color: #b81010;
   border-radius: 10px;
+ 
+  border-radius: 9px;
+  border: 3px solid #ffffff;
+}
+#btnFinis{
   width: 45%;
+  height: 80px;
+  margin-top: 11%;
+  background-color: #b81010;
+  border-radius: 10px;
+ 
   border-radius: 9px;
   border: 3px solid #ffffff;
 }
 
 .styleD{
   font-size: 17px;
+  padding-left: 5%;
   color: #0c8542;
   font-weight: bold;
 }
 
 .val{
   background-color: #0c8542;
+  border-radius: 5px;
   color: #ffffff;
   width: 150px;
 }
@@ -169,7 +240,7 @@ h3{
 }
 
 .btnfinish{
-  margin-top: 11px;
+  margin-top: 50px;
 }
 
 .powerUp{

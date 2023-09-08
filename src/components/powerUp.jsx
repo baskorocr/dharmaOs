@@ -11,58 +11,54 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function App(){
-  const navigate = useNavigate();
+function  App(){
+  
   const sharedVariable = useSelector((state) => state.sharedVariable);
-  //handler api
-  const apiUrl = 'https://dummyjson.com/products/1';
- console.log(apiUrl);
-  const [status, setStatus] = useState(null);
-  const [error, setError] = useState(null);
-  
+ 
+  const navigate = useNavigate();
+
+  console.log(sharedVariable);
 
 
-  //set background handling
+  const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
+  setTimeout(2000);
+
+
   useEffect(() => {
-    // Fetch products immediately when the component mounts
-    fetchApi();
+    // Delay for 2 seconds (2000 milliseconds)
+    const delay = 3000;
+
+    const timer = setTimeout(() => {
+      axios.get(api).then(
+        Response => {
+          console.log(Response.data);
+          if(Response.data['phs'] === 7){
+            console.log("dsads");
+            navigate('/dashboard');
+          }
+          else{
+            navigate('/cek');
+          }
+        }
+      ).catch(err => 
+        {
+          console.log(err);
+        })
+      console.log('Delayed code executed after 2 seconds');
+    }, delay);
+
+    // Clear the timer if the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
+  
    
-    
-    // Set up an interval to fetch products every 5 seconds
-    const intervalId = setInterval(fetchApi, 2000);
-
-    // Clean up the interval when the component unmounts
-    return () => {
-      clearInterval(intervalId);
-    };
-  } );
-
-  
-  
-  const fetchApi = async () =>{
-    axios.get(apiUrl)
-    .then(response => {
-      setStatus(response.data);
-      
-      navigate("/dashboard");
-    })
-    .catch(error => {
-      setError(error);
-  
-    });
-  }
-
-
-  
-
-
-  
 
   return(
     
-    <div className='animate__animated animate__fadeIn '>
+    <div className='animate__animated animate__fadeIn top'>
 
-<img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
+        <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
         <h1 className={"d-flex justify-content-center mt-2"}>Power Up Machine</h1>
         <div className={"d-flex justify-content-center"}>
