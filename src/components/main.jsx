@@ -14,11 +14,11 @@ function Main(){
       try {
         await fetch(apiUrl); // Replace with your API endpoint
         setData(true);
-        setTimeout(() => fetchData(),5000);
+        setTimeout(() => fetchData(),1000);
         
       } catch (err) {
         setError(err);
-        setTimeout(() => fetchData(),5000);
+        setTimeout(() => fetchData(),1000);
       }
     };
 
@@ -33,11 +33,11 @@ function Main(){
 
 
   return (
-    <div className='animate__animated animate__fadeIn '>
+    <div className='animate__animated animate__fadeIn top'>
       
       <img className={"logo"} src={require('../Assets/img/logo.png')} alt="" />
       
-      <div className={"d-flex justify-content-center mt-4"}>
+      <div className={"loading mt-4"}>
          <ReactLoading  className={'loading' } type={"spin"} color={"#ffffff"} height={'20%'} width={'20%'} />
       </div>
       <h1 className={"d-flex justify-content-center mt-5"}>Start the engine</h1>

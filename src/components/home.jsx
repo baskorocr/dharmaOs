@@ -5,6 +5,7 @@ import { setSharedVariable } from '../state/action';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import controlEme from "./controlEme";
+import { useSelector } from 'react-redux';
 
 function App(){
 
@@ -12,56 +13,38 @@ function App(){
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const apiUrl = 'http://10.20.27.100/api/webui/data'; // Assuming this API returns a single product
-  const urlEvent = 'http://10.20.27.100/api/events/last';
+  //urlEvent Change to UrlOutlet CCS
+
+  const urlAC = 'http://10.20.27.100/api/outlets/ac/state';
+  const urlCCS = 'http://10.20.27.100/api/outlets/ccs/state';
   const [data, setData] = useState({ } );
   const [isButtonDisabled1, setIsButtonDisabled1] = useState(null);
   const [isButtonDisabled2, setIsButtonDisabled2] = useState(null);
   const [isButtonDisabled3, setIsButtonDisabled3] = useState(true);
-  const [plug, setPlug] = useState([]);
+  const [plug1, setPlug1] = useState([]);
+  const [plug2, setPlug2] = useState([]);
+  const [plug3, setPlug3] = useState([]);
   const [error, setError] = useState(null);
-  
- 
-  function plugCCS (){
-    axios.get(urlEvent).
-    then(response =>{
-      const length = (response.data.length -1)
+  const [type, setType] = useState(null);
+  const sharedVariable = useSelector((state) => state.sharedVariable);
 
-      if(response.data[length]['type'] === "session_start"){
-      
-        if(response.data[length]['outlet'] === "1"){
-          setPlug(1);
-          console.log("dsads");
-          
-        }
-        else if(response.data[length]['outlet'] === "2"){
-          setPlug(2);
-        }
-        else if(response.data[length]['outlet'] === "3"){
-          setPlug(3);
-        }
-      }
-      else{
-        setPlug(0);
-      }
-    }).catch(err =>{
-      console.log(err);
-    })
-  }
-  
-  
+ 
   useEffect(() => {
-    let isMounted = true;
    
    
+   
+  
     const fetchData = async () => {
-      //controlEme(navigate);
+      
+     controlEme(navigate,sharedVariable);
       plugCCS();
+      plugAC ();
 
       try {
         axios.get(apiUrl)
           .then(response => {
-            console.log(response.data['status']);
-           
+        
+           console.log(response);
               if(response.data['status']['ccs'] && response.data['status']['ac'] && response.data['status']['chademo']){
                 setIsButtonDisabled1(false);
                 setIsButtonDisabled2(false);
@@ -97,9 +80,9 @@ function App(){
 
                 setData(update);
               
-              
+                fetchData();
  
-              setTimeout(() => fetchData(),2000);
+                
             // else if(response.data.length == 3){
 
             // }
@@ -114,19 +97,79 @@ function App(){
         
       } catch (err) {
         console.log(err)
-        if (isMounted) {
+        
           setError(err);
-        }
+        
       }
+     
     };
 
     // Fetch data when the component mounts
     fetchData();
+   
 
-    return () => {
-      isMounted = false; // Prevent state updates on unmounted component
-    };
   }, []);
+  
+
+  function plugAC (){
+    axios.get(urlAC).
+    then(response =>{
+      
+      if(response.data['phs'] === 2){
+        setType("ac");
+        setPlug2(2);
+      }
+      else{
+        setPlug2(0);
+      }
+
+
+    }).catch(err =>{
+      console.log(err);
+    })
+  }
+
+
+  function plugCCS (){
+    axios.get(urlCCS).
+    then(response =>{
+      
+      if(response.data['phs'] === 2){
+        setType("ccs");
+        setPlug1(1);
+      }
+      else{
+        setPlug1(0);
+      }
+  
+
+    }).catch(err =>{
+      console.log(err);
+    })
+  }
+
+
+  function Auth(){
+    const data = {
+      "plug_type": type,
+      "auth": true,
+      "user": "user0815"
+    }
+    axios.post('http://10.20.27.100/api/outlets/'+type+'/coap/auth', data)
+    .then(response => {
+      
+      if(response.status === 200){
+       
+        navigate("/powerup");
+   
+      }
+  
+    }).catch(err =>{
+        navigate('/error');
+        console.log(err);
+    })
+  }
+  
 
 
   if (error) {
@@ -135,32 +178,33 @@ function App(){
   }
  
  
-  console.log(isButtonDisabled2);
- 
+
 
   //set handle for onClick event
   const ClickButton1 = () =>{
-    if(plug === 1){
-      dispatch(setSharedVariable("1"));
-      navigate("/powerup");
+    if(plug1 === 1){
+      dispatch(setSharedVariable("ccs"));
+      Auth();
     }
     else{
+     
+     
       navigate("/cek");
     }
   }
   const ClickButton2 = () =>{
-    if(plug === 2){
-      dispatch(setSharedVariable("2"));
-      navigate("/powerup");
+    if(plug2 === 2){
+      dispatch(setSharedVariable("ac"));
+      Auth();
     }
     else{
       navigate("/cek");
     }
   }
   const ClickButton3 = () =>{
-    if(plug === 3){
-      dispatch(setSharedVariable("2"));
-      navigate("/powerup");
+    if(plug3 === 3){
+      dispatch(setSharedVariable("chademo"));
+      Auth();
     }
     else{
       navigate("/cek");
@@ -172,16 +216,17 @@ function App(){
     
    margin: "auto",
     width: "260px",
-    height: "380px",
+    height: "470px",
     marginTop: "10%",
     borderRadius: "30px",
     border: "3px solid #ffffff",
-    backgroundColor: "#337CCF"
+    backgroundColor: "#337CCF",
+
   }
   const btn1Connect ={
     margin: "auto",
     width: "260px",
-    height: "380px",
+    height: "470px",
     marginTop: "10%",
     borderRadius: "30px",
     border: "3px solid #0c8542",
@@ -190,7 +235,7 @@ function App(){
   const btn2Connect ={
     margin: "auto",
     width: "260px",
-    height: "380px",
+    height: "470px",
     marginTop: "10%",
     borderRadius: "30px",
     border: "3px solid #0c8542",
@@ -199,7 +244,7 @@ function App(){
   const btn3Connect ={
     margin: "auto",
     width: "260px",
-    height: "380px",
+    height: "470px",
     marginTop: "10%",
     borderRadius: "30px",
     border: "3px solid #0c8542",
@@ -209,7 +254,7 @@ function App(){
   const notVailable ={
     margin: "auto",
     width: "260px",
-    height: "380px",
+    height: "470px",
     marginTop: "10%",
     borderRadius: "30px",
     border: "3px solid #ffffff",
@@ -227,21 +272,23 @@ function App(){
     <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
         <h1 className={"d-flex justify-content-center mt-2"}>Charging Station</h1>
-
-        <div className={"row "}>
-          <div className={"col-4"}>
-            <button style={  data[1] === true  ? ( plug === 1 ? (btn1Connect):(btn)): (notVailable)} disabled={isButtonDisabled1} onClick={ClickButton1}>
+        <br />
+        <div className={"row gx-5"}>
+          <div className={"col-4 "}>
+            <button className={"me-5 ms-5"} style={  data[1] === true  ? ( plug1 === 1 ? (btn1Connect):(btn)): (notVailable)} disabled={isButtonDisabled1} onClick={ClickButton1}>
               <div className={"number btn1"}>1</div>
               <br />
               <h3 className={"text"}>CCS</h3>
-              <img src={require('../Assets/img/ccs.png')} className={"icon"} alt="" />
+              
+              <img id="ccsType" src={require('../Assets/img/ccs.png')} className={"icon"} alt="" />
               {
                 isButtonDisabled1 ? (
                   <p className={"code ccs"}>Not Available</p>
                 ) : (
-                  data === 1 ? (
+                  plug1 === 1 ? (
                     <p className={"code ccs"}  >EV Connected</p>
                   ) : (
+                    
                     <p className={"code ccs"}>Available</p>
                   )
                 )
@@ -251,17 +298,17 @@ function App(){
             </button>
           </div>
           <div className={"col-4"}>
-          <button style={ 
-            data[2] === true  ? (plug === 2 ? (btn2Connect):(btn)): (notVailable) } disabled={isButtonDisabled2} onClick={ClickButton2}>
+          <button className={"ms-5 me-5"} style={ 
+            data[2] === true  ? (plug2 === 2 ? (btn2Connect):(btn)): (notVailable) } disabled={isButtonDisabled2} onClick={ClickButton2}>
           <div className={"number btn2"}>2</div>
               <br />
               <h3 className={"text"}>AC</h3>
-              <img src={require('../Assets/img/type2.png')} className={"icon2"} alt="" />
+              <img id={"ccsAC"} src={require('../Assets/img/type2.png')} className={"icon2"} alt="" />
               {
                 isButtonDisabled2 ? (
                   <p className={"code type2"}>Not Available</p>
                 ) : (
-                  data === 2 ? (
+                  plug2 === 2 ? (
                     <p className={"code type2"}>EV Connected</p>
                   ) : (
                     <p className={"code type2"}>Available</p>
@@ -277,7 +324,7 @@ function App(){
           </button>
           </div>
           <div className={"col-4"}>
-          <button style={data[3] === true  ? (plug === 3 ? (btn3Connect):(btn)): (notVailable)} disabled={isButtonDisabled3} onClick={ClickButton3}>
+          <button className={"ms-5 me-5"} style={data[3] === true  ? (plug3 === 3 ? (btn3Connect):(btn)): (notVailable)} disabled={isButtonDisabled3} onClick={ClickButton3}>
           <div className={"number btn3"}>3</div>
               <br />
               <h3 className={"text"}>CHAdeMO</h3>
@@ -297,10 +344,10 @@ function App(){
           
       
         </div>
-
-        {plug === 1 &&  <h2 className={"d-flex justify-content-center mt-4"}> CCS Has Been Connected </h2>}
-        {plug === 2 && <h2 className={"d-flex justify-content-center mt-4"}> AC Has Been Connected</h2>}
-        {plug === 0 && <h2 className={"d-flex justify-content-center mt-4"}> Please plug-in and select outlet to start</h2>}     
+        <br />
+        {plug1 === 1 &&  <h2 className={"d-flex justify-content-center mt-4 ms-3"}> CCS Has Been Connected </h2>}
+        {plug2 === 2 && <h2 className={"d-flex justify-content-center mt-4 ms-3"}> AC Has Been Connected</h2>}
+       
        
         
      

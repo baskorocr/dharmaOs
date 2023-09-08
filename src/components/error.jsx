@@ -6,7 +6,7 @@ function App(){
 
   return(
     
-    <div className='animate__animated animate__fadeIn '>
+    <div className='animate__animated animate__fadeIn top'>
 
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 

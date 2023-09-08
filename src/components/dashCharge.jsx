@@ -2,50 +2,77 @@ import React,{useState,useEffect} from "react";
 
 import '../Assets/index.css';
 import axios from 'axios';
-
+import { useNavigate } from "react-router-dom";
+import socketIO from 'socket.io-client';
 import { useSelector } from 'react-redux';
 
 
 function App(){
+  const navigate = useNavigate();
   const sharedVariable = useSelector((state) => state.sharedVariable);
   
-  //handler api
-  const apiUrl = 'https://10.27.20.50:3001/'+sharedVariable+'/api';
-
-  const [status, setStatus] = useState(null);
-  const [error, setError] = useState(null);
-  const fetchApi = async () =>{
-    axios.get(apiUrl)
-    .then(response => {
-      setStatus(response.data);
-      
-
-    })
-    .catch(error => {
-      setError(error);
   
-    });
-  }
+  //handler api
+  const apiUrl = 'ws://10.20.27.100/api/outlets/'+sharedVariable+'/statestream';
 
 
-  //set background handling
+  const [data, setData] = useState({});
+  const [error, setError] = useState(null);
+  
+
+ 
   useEffect(() => {
-    // Fetch products immediately when the component mounts
-    fetchApi();
-   
-    
-    // Set up an interval to fetch products every 5 seconds
-    const intervalId = setInterval(fetchApi, 2000);
+    const socket = new WebSocket(apiUrl);
 
-    // Clean up the interval when the component unmounts
-    return () => {
-      clearInterval(intervalId);
+    // WebSocket event handlers
+    socket.onopen = () => {
+      console.log('Connected to WebSocket server');
     };
-  });
 
+    socket.onmessage = (event) => {
+      console.log(event.data);
+      const jsonData = JSON.parse(event.data);
+      setData(jsonData);
+    };
+
+    socket.onclose = (event) => {
+      if (event.wasClean) {
+        console.log(`Connection closed cleanly, code=${event.code}, reason=${event.reason}`);
+      } else {
+        console.error('Connection abruptly closed');
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    // Clean up the WebSocket connection when the component unmounts
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+ 
   //set handle for onClick event
   const backHome1 = () =>{
-    window.location = "/home";
+    stopCharge();
+  }
+
+  function stopCharge(){
+    
+    axios.post('http://10.20.27.100/api/outlets/ac/coap/stop')
+    .then(response => {
+      console.log(response.status);
+      if(response.status === 200){
+        console.log("dasds");
+        navigate("/home");
+      }
+  
+    }).catch(err =>{
+        navigate('/error');
+        console.log(err);
+    })
   }
   
   const val = 50
@@ -53,9 +80,9 @@ function App(){
   const style1 = {
     borderRadius: '5px',
     height:"30px",
-    backgroundColor: "#337CCF",
+    backgroundColor: "#d9d9d9",
     marginTop : '1%',
-    width: '580px',
+    width: '708px',
 
     
   }
@@ -63,24 +90,24 @@ function App(){
     borderRadius: '5px',
     height:"30px",
     backgroundColor: "#0c8542",
-    width: val+'%',
+    width: data["EVRESSSOC"]+'%',
   }
 
   console.log(apiUrl);
 
   return(
     
-    <div className='animate__animated animate__fadeIn '>
+    <div className='animate__animated animate__fadeIn top'>
 
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
         <h1 className={"d-flex justify-content-center mt-2"}>Dashboard Monitoring</h1>
-        <div className={"mt-3 card"}>     
+        <div className={"mt-3 ps-2 pt-4"} id={"customCard"}>     
             
-                <div className={"row pt-4 ps-5"}>
+                <div className={"row pt-6 ps-5 pe-3"}>
                     <div className={"col-8 "}>
-                       <h4 className={"status"}>Status Battery</h4>
+                       <h4 className={"status"}>Battery Status</h4>
                     </div>
-                    <div className={"col-2 d-flex justify-content-center"}>
+                    <div className={"col-2 "}>
                         <h4 className={"status"}>0%</h4>
                     </div>
                     <div className="col-2">
@@ -96,7 +123,7 @@ function App(){
                 <div className={"line"}></div>
 
 
-                <div className={"container mt-4 ps-3 styleD pe-4"}>
+                <div className={"container mt-4  styleD pe-5"}>
                     <div className={"row"}>
                     <div className={"col-md-6"}>
 
@@ -105,7 +132,7 @@ function App(){
                             •Volt | Ampere
                             </div>
                             <div className={"col-md-6 val"}>
-                            value
+                            {data['pv']} V | {data['pc'] } A
                             </div>
                             </div>
 
@@ -117,7 +144,7 @@ function App(){
                             •Max kW
                             </div>
                             <div className={"col-md-6 val"}>
-                                value
+                              {(data["evsemaxp"]/1000)} 
                             </div>
                             </div>
                     </div>
@@ -128,7 +155,7 @@ function App(){
 
 
 
-                <div className={"container mt-2 ps-3 styleD pe-4"}>
+                <div className={"container mt-2  styleD pe-5"}>
                     <div className={"row"}>
                     <div className={"col-md-6"}>
 
@@ -137,7 +164,7 @@ function App(){
                             •Current Time
                             </div>
                             <div className={"col-md-6 val"}>
-                            value
+                              {data["curr_ses_secs"]} S
                             </div>
                             </div>
 
@@ -149,7 +176,7 @@ function App(){
                             •Current kWh
                             </div>
                             <div className={"col-md-6 val"}>
-                            value
+                            {((data["curr_ses_Wh"])/1000) === NaN ? ("") : ((data["curr_ses_Wh"])/1000) }
                             </div>
                             </div>
                     </div>
@@ -160,7 +187,7 @@ function App(){
 
 
 
-                <div className={"container mt-2 ps-3 styleD pe-4 "}>
+                <div className={"container mt-2 styleD pe-5 "}>
                     <div className={"row"}>
                     <div className={"col-md-6"}>
 
@@ -169,7 +196,7 @@ function App(){
                             •Estimate
                             </div>
                             <div className={"col-md-6 val"}>
-                            value
+                            {data["TimeToFull"]/60} Minute
                             </div>
                             </div>
 
@@ -181,7 +208,13 @@ function App(){
                             •Channel
                             </div>
                             <div className={"col-md-6 val"}>
-                            {sharedVariable}
+                            {sharedVariable === "ccs" && 1
+                            }
+                            {sharedVariable === "ac" && 2
+                            }
+                            {sharedVariable === "chademo" && 3
+                            }
+
                             </div>
                             </div>
                     </div>
@@ -190,18 +223,24 @@ function App(){
                     
                 </div>
 
-                <div className="d-flex justify-content-center mt-3 mb-3"> 
-                        <button onClick={backHome1} className="btnFinish mt-3 d-flex-justify-content-center">
+                <div className="d-flex justify-content-center mb-3"> 
+                        <button onClick={backHome1} id="btnFinis" className=" d-flex-justify-content-center">
+                            
+
                             <div className="row">
-                                <div className="col-1">
-                                <img className={"home  btnfinish ms-3"}  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEftl9FRAzEMRKVOSCWQSiCVAJVAKiGdECpZZjN2RiNsWXb4CEz8F5/PfreS1orKlQ29Mh75f0AAXkTkuSj9qqr8vTwuVugGNNL+ppBXCMCdiNyp6oHPegqVdaKqx5HK9vlUUpvDz9UUALHaHkVkP1N5aSAAHyLy4Mt7AFTt4Kiqm4xSKSAHw32tQjy0eo+dfxKRNwORghoCRTAlh5pAjfzi1Luq7iKlQiAADBFDVce2JnOdANAFKlBeqR97pJPaqdP8uhFQQ6mDqm57KnUV8uqoanNtEohW8RkpXZ9FQExIyh3GPgNUVLL7dS/hLFA37hNANh+7YYuAKDGl5tjMOm7H4WvYuhYQAeEc107+ZIzOrgFQ91wCsgqFpZoByxZJpFDzqsgc3loDwPrRUg7Z1jT0jgwkgFTVZn2ILQTDNtVKGDf/FR/iJvyqesMvq+QcP7xkZ++y6X8VLnco2vpd1nBYTqWhXK/Ed4cqZ9oPHzpuzFza+Zvf5QyrtBrr6Z1MkzYEKiq1oCrY6ctF5EtE7k3O2eIbKjO8XDvWTy+pbWmm2qdCzMUphZz9U60RGEO6Lx3ilFVMAzXgqi0QlIczV05/kVbGRUArB47euQH9OYW+AQkNKjSf6gJxAAAAAElFTkSuQmCC"/>
-                                
-                                </div>
-                                <div className="col">
-                                <h5 className={"back"}>Finish Charging</h5>
-                                </div>
+
+                            <div className={"col-4 t "} id={"homeImg"}>
+                            <img className="d-flex justify-content-right" alt="cek" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAX5JREFUWEft2GtugzAMAOBYMfdobzJusp5k7Um2m4ybjHvUyFOyhgaIyatIaIK/OOSrk9hRQe3sgZ151P8DMfNJDcOnzbTWFwDoa7JelaEH5scD9ErrtgZVDApgnKsKVQQKZuaPc3qoilHZoCCG+aIQezUM37WoLJCEgabpTGYe76tQyaAYxm2gWlQSKBXzClQUlIupRa2CSjE1KBFUiylFBUGvwpSgFqBgBWZu3dEu7VOpbWYCktoBIEY3fwqUiXgWt6joUxCRaZSu/I9jNwSZOXpAPLvJdg4ydxuid6sF+BjVgSVjE2fiw09netv8GjJZMuabHYr45cfJx95bb3/JVq4dS5rWZ38yHyRtg3wQkWmebymbWCnVAWI7Hn/hR/rfKgE9T4pL+1wnLPdWGRpBUtqliQ9QbK8cGToyZC/yCbVkq1MWbLSJBTEWNmmoaYXxfr/6/Sw2Q9Z75hs0zTU0Zv1OTWT+RDBtQmqiWQ4bvIKxPT3/i9uOOECx/P4CDROgNG2o86UAAAAASUVORK5CYII="/>
+                            </div>
+                            <div className={"col-8"}>
+                            <h5 className={"back"} id={"back"}>Back To Home</h5>
+                            </div>
+            
                             </div>
                         </button>
+
+
+                        
                 </div>
 
         </div>
