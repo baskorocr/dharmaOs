@@ -1,33 +1,16 @@
 import React,{useState,useEffect} from "react";
 import '../Assets/index.css';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import controlEme from "./controlEme";
 
 function App(){
 
   const navigate = useNavigate();
-  //handler api
-  const apiUrl = 'https://10.27.20.50:3001';
-  const [status, setStatus] = useState(null);
-  const [error, setError] = useState(null);
-  const fetchApi = async () =>{
-    axios.get(apiUrl)
-    .then(response => {
-      setStatus(response.data);
-      
-
-    })
-    .catch(error => {
-      setError(error);
-  
-    });
-  }
 
 
   useEffect(() => {
     // Delay for 2 seconds (2000 milliseconds)
-    const delay = 3000;
+    const delay = 1000;
 
     const timer = setTimeout(() => {
       controlEme(navigate);

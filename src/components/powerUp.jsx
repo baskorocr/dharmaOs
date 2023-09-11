@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useEffect} from "react";
 
 import '../Assets/index.css';
 import axios from 'axios';
@@ -17,7 +17,7 @@ function  App(){
  
   const navigate = useNavigate();
 
-  console.log(sharedVariable);
+
 
 
   const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
@@ -31,9 +31,9 @@ function  App(){
     const timer = setTimeout(() => {
       axios.get(api).then(
         Response => {
-          console.log(Response.data);
+         
           if(Response.data['phs'] === 7){
-            console.log("dsads");
+            
             navigate('/dashboard');
           }
           else{
@@ -44,7 +44,7 @@ function  App(){
         {
           console.log(err);
         })
-      console.log('Delayed code executed after 2 seconds');
+  
     }, delay);
 
     // Clear the timer if the component unmounts
@@ -61,11 +61,13 @@ function  App(){
         <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
         <h1 className={"d-flex justify-content-center mt-2"}>Power Up Machine</h1>
+        <br />
         <div className={"d-flex justify-content-center"}>
             <img src={require('../Assets/img/powerUp.gif')} className={"powerUp"} alt="" />
             
 
         </div>
+        <br />
         <h1 className={"d-flex justify-content-center mt-2"}>Checking adaptor connection</h1>
         
      
