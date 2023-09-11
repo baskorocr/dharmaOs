@@ -8,7 +8,6 @@ import Home from "./components/home";
 // import About component
 import Main from "./components/main";
 // import ContactUs component
-import ContactUs from "./components/ContactUs";
 import Cek from "./components/cekConect";
 import Dashboard from "./components/dashCharge"; 
 import Error from "./components/error";
@@ -27,7 +26,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/contact" element={<ContactUs />} />
           <Route path="/cek" element={<Cek />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/error" element={<Error />} />

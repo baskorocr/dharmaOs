@@ -18,8 +18,8 @@ function App(){
   const urlAC = 'http://10.20.27.100/api/outlets/ac/state';
   const urlCCS = 'http://10.20.27.100/api/outlets/ccs/state';
   const [data, setData] = useState({ } );
-  const [isButtonDisabled1, setIsButtonDisabled1] = useState(null);
-  const [isButtonDisabled2, setIsButtonDisabled2] = useState(null);
+  const [isButtonDisabled1, setIsButtonDisabled1] = useState(true);
+  const [isButtonDisabled2, setIsButtonDisabled2] = useState(true);
   const [isButtonDisabled3, setIsButtonDisabled3] = useState(true);
   const [plug1, setPlug1] = useState([]);
   const [plug2, setPlug2] = useState([]);
@@ -35,8 +35,8 @@ function App(){
    
   
     const fetchData = async () => {
-      
-     controlEme(navigate,sharedVariable);
+
+      controlEme(navigate,sharedVariable);
       plugCCS();
       plugAC ();
 
@@ -44,7 +44,7 @@ function App(){
         axios.get(apiUrl)
           .then(response => {
         
-           console.log(response);
+           
               if(response.data['status']['ccs'] && response.data['status']['ac'] && response.data['status']['chademo']){
                 setIsButtonDisabled1(false);
                 setIsButtonDisabled2(false);
@@ -96,7 +96,7 @@ function App(){
       
         
       } catch (err) {
-        console.log(err)
+          console.log(err)
         
           setError(err);
         
@@ -329,6 +329,7 @@ function App(){
               <br />
               <h3 className={"text"}>CHAdeMO</h3>
               <img src={require('../Assets/img/chademo.png')} className={"icon3"} alt="" />
+             
               {
                 isButtonDisabled3 ? (
                   <p className={"code chademo"}>Not Available</p>

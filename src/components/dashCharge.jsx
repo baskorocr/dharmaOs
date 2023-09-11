@@ -3,8 +3,9 @@ import React,{useState,useEffect} from "react";
 import '../Assets/index.css';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import socketIO from 'socket.io-client';
+
 import { useSelector } from 'react-redux';
+
 
 
 function App(){
@@ -17,7 +18,7 @@ function App(){
 
 
   const [data, setData] = useState({});
-  const [error, setError] = useState(null);
+ 
   
 
  
@@ -30,7 +31,7 @@ function App(){
     };
 
     socket.onmessage = (event) => {
-      console.log(event.data);
+    
       const jsonData = JSON.parse(event.data);
       setData(jsonData);
     };
@@ -61,11 +62,10 @@ function App(){
 
   function stopCharge(){
     
-    axios.post('http://10.20.27.100/api/outlets/ac/coap/stop')
+    axios.post('http://10.20.27.100/api/outlets/'+sharedVariable+'/coap/stop')
     .then(response => {
       console.log(response.status);
       if(response.status === 200){
-        console.log("dasds");
         navigate("/home");
       }
   
@@ -75,7 +75,7 @@ function App(){
     })
   }
   
-  const val = 50
+
    
   const style1 = {
     borderRadius: '5px',

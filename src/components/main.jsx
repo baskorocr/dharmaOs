@@ -14,7 +14,7 @@ function Main(){
       try {
         await fetch(apiUrl); // Replace with your API endpoint
         setData(true);
-        setTimeout(() => fetchData(),1000);
+      
         
       } catch (err) {
         setError(err);
