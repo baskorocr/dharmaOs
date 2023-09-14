@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useState,useEffect} from "react";
 
 import '../Assets/index.css';
 import axios from 'axios';
@@ -16,42 +16,57 @@ function  App(){
   const sharedVariable = useSelector((state) => state.sharedVariable);
  
   const navigate = useNavigate();
+  const [text, setText] = useState(["Please Wait"]);
 
 
-
+  //http://10.20.27.100/api/outlets/'+sharedVariable+'/state
 
   const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
-  setTimeout(2000);
+
 
 
   useEffect(() => {
-    // Delay for 2 seconds (2000 milliseconds)
-    const delay = 3000;
+    fetchData();
 
-    const timer = setTimeout(() => {
-      axios.get(api).then(
-        Response => {
-         
-          if(Response.data['phs'] === 7){
-            
-            navigate('/dashboard');
-          }
-          else{
-            navigate('/cek');
-          }
-        }
-      ).catch(err => 
-        {
-          console.log(err);
-        })
-  
-    }, delay);
+    const interval = setInterval(fetchData, 1000);
+    return () => clearInterval(interval);
 
-    // Clear the timer if the component unmounts
-    return () => clearTimeout(timer);
   }, []);
 
-  
+  function fetchData(){
+    console.log(text);
+    axios.get(api).then(
+      Response => {
+        console.log(Response);
+        if(Response.data['phs'] === 3){
+          setText("Parameters Discovery");
+        }
+        else if(Response.data['phs'] === 4){
+          setText("Checking Adaptor Connection");
+        }
+        else if(Response.data['phs'] === 5){
+          setText("Precharge Processing");
+        }
+        else if(Response.data['phs'] === 6){
+          setText("Starting  Charging");
+          navigate("/dashboard");
+        }
+        else if(Response.data['phs'] === 7){
+          
+          navigate('/dashboard');
+        }
+        else if(Response.data['phs'] === 1){
+          navigate('/cek');
+        }
+        else{
+          setText("Please Wait For The Machine To Be Prepared ");
+        }
+      }
+    ).catch(err => 
+      {
+        console.log(err);
+      })
+  }
    
 
   return(
@@ -68,7 +83,7 @@ function  App(){
 
         </div>
         <br />
-        <h1 className={"d-flex justify-content-center mt-2"}>Checking adaptor connection</h1>
+        <h1 className={"d-flex justify-content-center mt-2"}>{text}</h1>
         
      
     

@@ -5,12 +5,14 @@ import axios from "axios";
 
 const ControlEme = function(navigate, val){
 
-    if(val === ''){
+    console.log(val);
+    if(val === '' ||  val ==='ac'){
       defaultGetEme(navigate);
     }
-    else if(val === 'ccs'){
-      CCSGetEme(navigate, val);
+    else if(val === 'ccs' ){
+      OutletEme(navigate, val);
     }
+    
     
     
 
@@ -31,15 +33,18 @@ function defaultGetEme(navigate){
       })
 }
 
-function CCSGetEme(navigate, val){
+function OutletEme(navigate, val){
   const apiUrl = 'http://10.20.27.100/api/outlets/'+val+'/state'; // Assuming this API returns a single product
       axios.get(apiUrl)
       .then(response => {
         
+         
          if(response.data['evsestat'] === 5){
           stopCharge(val);
           navigate("/untwist");
          }
+        
+        
        
       }).catch(error => {
         navigate('/error');
