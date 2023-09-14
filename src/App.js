@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/cek" element={<Cek />} />
+          <Route path="/cek" someProp="Hello, World!" element={<Cek /> } />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/error" element={<Error />} />
           <Route path="/powerup" element={<PowerUp />} />

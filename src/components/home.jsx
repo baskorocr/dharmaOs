@@ -7,16 +7,17 @@ import { useDispatch } from "react-redux";
 import controlEme from "./controlEme";
 import { useSelector } from 'react-redux';
 
+
 function App(){
 
-  
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const apiUrl = 'http://10.20.27.100/api/webui/data'; // Assuming this API returns a single product
-  //urlEvent Change to UrlOutlet CCS
-
+  //use url api in vsecc
+  const apiUrl = 'http://10.20.27.100/api/webui/data';
   const urlAC = 'http://10.20.27.100/api/outlets/ac/state';
   const urlCCS = 'http://10.20.27.100/api/outlets/ccs/state';
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const [data, setData] = useState({ } );
   const [isButtonDisabled1, setIsButtonDisabled1] = useState(true);
   const [isButtonDisabled2, setIsButtonDisabled2] = useState(true);
@@ -28,89 +29,73 @@ function App(){
   const [type, setType] = useState(null);
   const sharedVariable = useSelector((state) => state.sharedVariable);
 
- 
-  useEffect(() => {
-   
-   
-   
   
-    const fetchData = async () => {
-
-      controlEme(navigate,sharedVariable);
-      plugCCS();
-      plugAC ();
-
-      try {
-        axios.get(apiUrl)
-          .then(response => {
-        
-           
-              if(response.data['status']['ccs'] && response.data['status']['ac'] && response.data['status']['chademo']){
-                setIsButtonDisabled1(false);
-                setIsButtonDisabled2(false);
-                setIsButtonDisabled3(false);
-               
-              }
-              else if(response.data['status']['ccs'] && response.data['status']['ac'] && response.data['status']['chademo'] === false){
-                setIsButtonDisabled1(false);
-                setIsButtonDisabled2(false);
-                setIsButtonDisabled3(true);
-              }
-              else if(response.data['status']['ccs'] && response.data['status']['ac'] === false && response.data['status']['chademo']){
-                setIsButtonDisabled1(false);
-                setIsButtonDisabled2(true);
-                setIsButtonDisabled3(false);
-              }
-              else if(response.data['status']['ccs'] === false && response.data['status']['ac'] && response.data['status']['chademo']){
-                setIsButtonDisabled1(true);
-                setIsButtonDisabled2(false);
-                setIsButtonDisabled3(false);
-              }
-              else if(response.data['status']['ccs'] === false && response.data['status']['ac'] === false && response.data['status']['chademo'] === false){
-                setIsButtonDisabled1(true);
-                setIsButtonDisabled2(true);
-                setIsButtonDisabled3(true);
-              }
-              
-                const update = {
-                  1: response.data['status']['ccs'],
-                  2: response.data['status']['ac'],
-                  3: response.data['status']['chademo']
-                }
-
-                setData(update);
-              
-                fetchData();
- 
-                
-            // else if(response.data.length == 3){
-
-            // }
-
-          })
-          .catch(error => {
-            setError(error);
-        
-          });
-          // Replace with your API endpoint
-      
-        
-      } catch (err) {
-          console.log(err)
-        
-          setError(err);
-        
-      }
-     
-    };
-
-    // Fetch data when the component mounts
+  useEffect(() => {
+  
     fetchData();
-   
+    const interval = setInterval(fetchData, 1000);
+    return () => clearInterval(interval);
 
   }, []);
+
+  //for data update all oulite
+  function fetchData(){
+    axios.get(apiUrl)
+    .then(response => {
+        if(response.data['status']['ccs'] && response.data['status']['ac'] && response.data['status']['chademo']){
+          setIsButtonDisabled1(false);
+          setIsButtonDisabled2(false);
+          setIsButtonDisabled3(false);
+         
+        }
+        else if(response.data['status']['ccs'] && response.data['status']['ac'] && response.data['status']['chademo'] === false){
+          setIsButtonDisabled1(false);
+          setIsButtonDisabled2(false);
+          setIsButtonDisabled3(true);
+        }
+        else if(response.data['status']['ccs'] && response.data['status']['ac'] === false && response.data['status']['chademo']){
+          setIsButtonDisabled1(false);
+          setIsButtonDisabled2(true);
+          setIsButtonDisabled3(false);
+        }
+        else if(response.data['status']['ccs'] === false && response.data['status']['ac'] && response.data['status']['chademo']){
+          setIsButtonDisabled1(true);
+          setIsButtonDisabled2(false);
+          setIsButtonDisabled3(false);
+        }
+        else if(response.data['status']['ccs'] === false && response.data['status']['ac'] === false && response.data['status']['chademo'] === false){
+          setIsButtonDisabled1(true);
+          setIsButtonDisabled2(true);
+          setIsButtonDisabled3(true);
+        }
+        
+          const update = {
+            1: response.data['status']['ccs'],
+            2: response.data['status']['ac'],
+            3: response.data['status']['chademo']
+          }
+
+          setData(update);
+
+          
+      // else if(response.data.length == 3){
+
+      // }
+
+    })
+    .catch(error => {
+      setError(error);
+  
+    });
+
+    controlEme(navigate,sharedVariable); //call function file controlEme
+    plugCCS();
+    plugAC ();
+   
+  };
   
 
+  //function check for adaptor AC has connect or not
   function plugAC (){
     axios.get(urlAC).
     then(response =>{
@@ -129,7 +114,7 @@ function App(){
     })
   }
 
-
+  //function check for adaptor CCS has connect or not
   function plugCCS (){
     axios.get(urlCCS).
     then(response =>{
@@ -148,7 +133,7 @@ function App(){
     })
   }
 
-
+  //function for Auth or Proccess starting PowerUp machine
   function Auth(){
     const data = {
       "plug_type": type,
@@ -180,7 +165,7 @@ function App(){
  
 
 
-  //set handle for onClick event
+  //set handle for onClick event Outlite in menu if adaptor has connected. The system can redirect to auth and not can redirect to cek
   const ClickButton1 = () =>{
     if(plug1 === 1){
       dispatch(setSharedVariable("ccs"));
@@ -188,8 +173,8 @@ function App(){
     }
     else{
      
-     
-      navigate("/cek");
+      dispatch(setSharedVariable("ccs"));
+      navigate("/cek"); 
     }
   }
   const ClickButton2 = () =>{
@@ -198,6 +183,7 @@ function App(){
       Auth();
     }
     else{
+      dispatch(setSharedVariable("ac"));
       navigate("/cek");
     }
   }
@@ -207,10 +193,13 @@ function App(){
       Auth();
     }
     else{
+      dispatch(setSharedVariable("chademo"));
       navigate("/cek");
     }
   }
 
+
+  //css for button home
   
   const btn = {
     

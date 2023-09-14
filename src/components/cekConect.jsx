@@ -2,23 +2,72 @@ import React,{useState,useEffect} from "react";
 import '../Assets/index.css';
 import { useNavigate } from "react-router-dom";
 import controlEme from "./controlEme";
+import { useSelector } from 'react-redux';
+import axios from "axios";
 
 function App(){
 
   const navigate = useNavigate();
 
+  
+
+  const [data, setData] = useState([]);
+
+  const sharedVariable = useSelector((state) => state.sharedVariable);
+  //http://10.20.27.100/api/outlets/'+sharedVariable+'/state
+  const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
+  console.log(api);
+
+ 
 
   useEffect(() => {
-    // Delay for 2 seconds (2000 milliseconds)
-    const delay = 1000;
-
-    const timer = setTimeout(() => {
-      controlEme(navigate);
-    }, delay);
-
-    // Clear the timer if the component unmounts
-    return () => clearTimeout(timer);
+   
+    
+    redirect();
+    const interval = setInterval(redirect, 1000);
+    return () => clearInterval(interval);
+    
   }, []);
+
+
+  function redirect(){
+    
+    controlEme(navigate,sharedVariable);
+    axios.get(api).then(
+      Response => {
+        console.log(Response);
+        if(Response.data['phs'] === 2){
+          Auth();
+        }
+        
+      }
+    ).catch(err => 
+      {
+        console.log(err);
+      })
+
+  }
+  function Auth(){
+    const data = {
+      "plug_type": sharedVariable,
+      "auth": true,
+      "user": "user0815"
+    }
+    axios.post('http://10.20.27.100/api/outlets/'+sharedVariable+'/coap/auth', data)
+    .then(response => {
+      
+      if(response.status === 200){
+       
+        navigate("/powerup");
+        
+   
+      }
+  
+    }).catch(err =>{
+        navigate('/error');
+        console.log(err);
+    })
+  }
 
   //set handle for onClick event
   const backHome1 = () =>{

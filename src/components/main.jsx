@@ -1,30 +1,36 @@
-import React, { useState, useEffect} from 'react';
+import axios from 'axios';
+import React, { useState, useEffect, useLayoutEffect} from 'react';
 import ReactLoading from 'react-loading';
 import { useNavigate } from "react-router-dom";
 
 
+
 function Main(){
+  ''
   const navigate = useNavigate();
+  //https://dummyjson.com/products/1
   const apiUrl = 'http://10.20.27.100/'; // Assuming this API returns a single product
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await fetch(apiUrl); // Replace with your API endpoint
-        setData(true);
-      
-        
-      } catch (err) {
-        setError(err);
-        setTimeout(() => fetchData(),1000);
-      }
-    };
-
-    // Fetch data when the component mounts
     fetchData();
+    const interval = setInterval(fetchData, 1000);
+    return () => clearInterval(interval);
+   
   }, []);
+
+  function fetchData(){
+    axios.get(apiUrl).then(Response => {
+
+      if(Response.status === 200){
+        console.log(Response.data);
+        navigate("/home");
+      }
+    }).catch(error =>{
+      console.log(error);
+    })
+  }
 
   if (data) {
     // If data is successfully fetched, redirect to the home page
