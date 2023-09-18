@@ -5,7 +5,7 @@ import axios from "axios";
 
 const ControlEme = function(navigate, val){
 
-    console.log(val);
+
     if(val === '' ||  val ==='ac'){
       defaultGetEme(navigate);
     }

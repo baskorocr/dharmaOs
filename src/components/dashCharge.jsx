@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import controlEme from "./controlEme";
 import '../Assets/index.css';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import stopCharge from './stopCharge';
 
@@ -31,9 +31,12 @@ function App(){
     };
 
     socket.onmessage = (event) => {
-      controlEme(navigate,sharedVariable);
+      
       const jsonData = JSON.parse(event.data);
       setData(jsonData);
+      if(jsonData["pilot"] === 7){
+        controlEme(navigate,sharedVariable);
+      }
     };
 
     socket.onclose = (event) => {
@@ -81,7 +84,7 @@ function App(){
            data["EVRESSOC"] === undefined ?(0):(data["EVRESSOC"])+'%',
   }
 
-  console.log(data["EVRESSOC"]);
+  
 
   return(
     
