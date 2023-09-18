@@ -1,0 +1,4 @@
+@echo off
+cd "C:\Users\basko\OneDrive\Documents\dharmaOs\build"
+start cmd /k "serve -p 3002"
+start chrome --start  --fullscreen --force-device-scale-factor=1.5 --kiosk 127.0.0.1:3002
