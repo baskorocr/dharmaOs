@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import '../Assets/index.css';
 
 
 function App(){
 
+  useEffect(()=>{
+    const handlePage = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }};
+     
+      window.addEventListener('wheel', handlePage, { passive: false });
+      return () => {window.removeEventListener('wheel', handlePage)};
+  })
   
   return(
     
