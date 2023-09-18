@@ -24,12 +24,18 @@ function  App(){
   const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
 
 
+   
 
   useEffect(() => {
     fetchData();
 
     const interval = setInterval(fetchData, 1000);
-    return () => clearInterval(interval);
+    const handlePage = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }};
+      window.addEventListener('wheel', handlePage, { passive: false });
+    return () => {clearInterval(interval); window.removeEventListener('wheel', handlePage);};
 
   }, []);
 

@@ -18,8 +18,13 @@ function App(){
   useEffect(() => {
 
     fetchData();
+    const handlePage = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }};
+    window.addEventListener('wheel', handlePage, { passive: false });
     const interval = setInterval(fetchData, 1000);
-    return () => clearInterval(interval);
+    return () => {clearInterval(interval);window.removeEventListener('wheel', handlePage);};
 
     
   }, []);

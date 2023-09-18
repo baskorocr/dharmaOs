@@ -23,6 +23,12 @@ function App(){
 
  
   useEffect(() => {
+    const handlePage = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }};
+    window.addEventListener('wheel', handlePage, { passive: false });
+
     const socket = new WebSocket(apiUrl);
 
     // WebSocket event handlers
@@ -53,7 +59,7 @@ function App(){
 
     // Clean up the WebSocket connection when the component unmounts
     return () => {
-      socket.close();
+      {socket.close(); window.removeEventListener('wheel', handlePage);}
     };
   }, []);
 

@@ -34,7 +34,12 @@ function App(){
   
     fetchData();
     const interval = setInterval(fetchData, 1000);
-    return () => clearInterval(interval);
+    const handlePage = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }};
+     window.addEventListener('wheel', handlePage, { passive: false });
+    return () =>{ clearInterval(interval,  window.removeEventListener('wheel', handlePage))};
 
   }, []);
 

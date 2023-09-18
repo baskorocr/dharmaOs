@@ -16,7 +16,12 @@ function Main(){
   useEffect(() => {
     fetchData();
     const interval = setInterval(fetchData, 1000);
-    return () => clearInterval(interval);
+    const handlePage = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }};
+    window.removeEventListener('wheel', handlePage);
+    return () => {clearInterval(interval); window.removeEventListener('wheel', handlePage);};
    
   }, []);
 
