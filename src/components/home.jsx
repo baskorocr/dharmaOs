@@ -260,9 +260,9 @@ function App(){
 
     <img className={"logo2 d-flex justify-content-center mt-4"} src={require('../Assets/img/logo.png')} alt="" />
 
-        <h1 className={"d-flex justify-content-center mt-2"}>Charging Station</h1>
+        <h1 className={"d-flex justify-content-center "}>Charging Station</h1>
         <br />
-        <div className={"row gx-5"}>
+        <div className={"row gx-5 choice"}>
           <div className={"col-4 "}>
             <button className={"me-5 ms-5"} style={  data[1] === true  ? ( plug1 === 1 ? (btn1Connect):(btn)): (notVailable)} disabled={isButtonDisabled1} onClick={ClickButton1}>
               <div className={"number btn1"}>1</div>
@@ -335,8 +335,8 @@ function App(){
       
         </div>
         <br />
-        {plug1 === 1 &&  <h2 className={"d-flex justify-content-center mt-4 ms-3"}> CCS Has Been Connected </h2>}
-        {plug2 === 2 && <h2 className={"d-flex justify-content-center mt-4 ms-3"}> AC Has Been Connected</h2>}
+        {plug1 === 1 &&  <h3 className={"d-flex justify-content-center mt-1 ms-3"}> CCS Has Been Connected </h3>}
+        {plug2 === 2 && <h3 className={"d-flex justify-content-center mt-1 ms-3"}> AC Has Been Connected</h3>}
        
        
         
