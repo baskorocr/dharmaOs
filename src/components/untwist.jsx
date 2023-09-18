@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useEffect} from "react";
 import '../Assets/index.css';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -10,9 +10,7 @@ function App(){
   const navigate = useNavigate();
   //handler api
   const sharedVariable = useSelector((state) => state.sharedVariable);
- 
 
-  const [error, setError] = useState(null);
   
 
   useEffect(() => {

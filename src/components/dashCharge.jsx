@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
 import controlEme from "./controlEme";
 import '../Assets/index.css';
-import axios from 'axios';
-import { json, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import stopCharge from './stopCharge';
 

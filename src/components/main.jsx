@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useLayoutEffect} from 'react';
+import React, { useEffect} from 'react';
 import ReactLoading from 'react-loading';
 import { useNavigate } from "react-router-dom";
 
@@ -10,8 +10,8 @@ function Main(){
   const navigate = useNavigate();
   //https://dummyjson.com/products/1
   const apiUrl = 'http://10.20.27.100/'; // Assuming this API returns a single product
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+
+ 
 
   useEffect(() => {
     fetchData();
@@ -37,10 +37,7 @@ function Main(){
     })
   }
 
-  if (data) {
-    // If data is successfully fetched, redirect to the home page
-    navigate("/home")
-  }
+
 
 
   return (

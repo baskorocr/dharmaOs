@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useEffect} from "react";
 import '../Assets/index.css';
 import { useNavigate } from "react-router-dom";
 import controlEme from "./controlEme";
@@ -8,10 +8,6 @@ import axios from "axios";
 function App(){
 
   const navigate = useNavigate();
-
-  
-
-  const [data, setData] = useState([]);
 
   const sharedVariable = useSelector((state) => state.sharedVariable);
   //http://10.20.27.100/api/outlets/'+sharedVariable+'/state
