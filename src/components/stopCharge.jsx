@@ -2,7 +2,7 @@ import axios from "axios";
 
 function stopCharge(sharedVariable,navigate){
     
-    axios.post('http://10.20.27.100/api/outlets/'+sharedVariable+'/coap/stop')
+    axios.post(process.env.REACT_APP_API_URL+'/api/outlets/'+sharedVariable+'/coap/stop')
     .then(response => {
       console.log(response.status);
       if(response.status === 200){

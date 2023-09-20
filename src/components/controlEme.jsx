@@ -20,7 +20,7 @@ const ControlEme = function(navigate, val){
 }
 
 function defaultGetEme(navigate){
-      const apiUrl = 'http://10.20.27.100/api/system/iostate'; // Assuming this API returns a single product
+      const apiUrl = process.env.REACT_APP_API_URL+'/api/system/iostate'; // Assuming this API returns a single product
       axios.get(apiUrl)
       .then(response => {
         
@@ -34,7 +34,7 @@ function defaultGetEme(navigate){
 }
 
 function OutletEme(navigate, val){
-  const apiUrl = 'http://10.20.27.100/api/outlets/'+val+'/state'; // Assuming this API returns a single product
+  const apiUrl = process.env.REACT_APP_API_URL+'/api/outlets/'+val+'/state'; // Assuming this API returns a single product
       axios.get(apiUrl)
       .then(response => {
         
@@ -52,7 +52,7 @@ function OutletEme(navigate, val){
 }
 function stopCharge(val){
     
-  axios.post('http://10.20.27.100/api/outlets/'+val+'/coap/stop')
+  axios.post(process.env.REACT_APP_API_URL+'/api/outlets/'+val+'/coap/stop')
   .then().catch(err =>{
       console.log(err);
   })

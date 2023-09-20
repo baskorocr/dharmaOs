@@ -11,7 +11,7 @@ function App(){
 
   const sharedVariable = useSelector((state) => state.sharedVariable);
   //http://10.20.27.100/api/outlets/'+sharedVariable+'/state
-  const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
+  const api = process.env.REACT_APP_API_URL+'/api/outlets/'+sharedVariable+'/state';
   console.log(api);
 
  
@@ -55,7 +55,7 @@ function App(){
       "auth": true,
       "user": "user0815"
     }
-    axios.post('http://10.20.27.100/api/outlets/'+sharedVariable+'/coap/auth', data)
+    axios.post(process.env.REACT_APP_API_URL+'/api/outlets/'+sharedVariable+'/coap/auth', data)
     .then(response => {
       
       if(response.status === 200){

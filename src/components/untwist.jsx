@@ -37,7 +37,7 @@ function App(){
   }
 
   function defaultGetEme(){
-    const apiUrl = 'http://10.20.27.100/api/system/iostate'; // Assuming this API returns a single product
+    const apiUrl = process.env.REACT_APP_API_URL+'/api/system/iostate'; // Assuming this API returns a single product
     axios.get(apiUrl)
     .then(response => {
       
@@ -52,7 +52,7 @@ function App(){
     }
     
     function OutletEme(){
-      const apiUrl = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state'; // Assuming this API returns a single product
+      const apiUrl = process.env.REACT_APP_API_URL+'/api/outlets/'+sharedVariable+'/state'; // Assuming this API returns a single product
           axios.get(apiUrl)
           .then(response => {
              if(response.data['evsestat'] === 1){
