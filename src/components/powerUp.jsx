@@ -21,7 +21,7 @@ function  App(){
 
   //http://10.20.27.100/api/outlets/'+sharedVariable+'/state
 
-  const api = 'http://10.20.27.100/api/outlets/'+sharedVariable+'/state';
+  const api = process.env.REACT_APP_API_URL+'/api/outlets/'+sharedVariable+'/state';
 
 
    

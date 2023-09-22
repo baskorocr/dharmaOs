@@ -9,8 +9,8 @@ function Main(){
   ''
   const navigate = useNavigate();
   //https://dummyjson.com/products/1
-  const apiUrl = 'http://10.20.27.100/'; // Assuming this API returns a single product
-
+  const apiUrl = process.env.REACT_APP_API_URL+'/'; // Assuming this API returns a single product
+  console.log(apiUrl);
  
 
   useEffect(() => {
