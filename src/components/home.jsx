@@ -46,47 +46,13 @@ function App() {
     axios
       .get(apiUrl)
       .then((response) => {
-        if (
-          response.data["status"]["ccs"] &&
-          response.data["status"]["ac"] &&
-          response.data["status"]["chademo"]
-        ) {
-          setIsButtonDisabled1(false);
-          setIsButtonDisabled2(false);
-          setIsButtonDisabled3(false);
-        } else if (
-          response.data["status"]["ccs"] &&
-          response.data["status"]["ac"] &&
-          response.data["status"]["chademo"] === false
-        ) {
-          setIsButtonDisabled1(false);
-          setIsButtonDisabled2(false);
-          setIsButtonDisabled3(true);
-        } else if (
-          response.data["status"]["ccs"] &&
-          response.data["status"]["ac"] === false &&
-          response.data["status"]["chademo"]
-        ) {
-          setIsButtonDisabled1(false);
-          setIsButtonDisabled2(true);
-          setIsButtonDisabled3(false);
-        } else if (
-          response.data["status"]["ccs"] === false &&
-          response.data["status"]["ac"] &&
-          response.data["status"]["chademo"]
-        ) {
-          setIsButtonDisabled1(true);
-          setIsButtonDisabled2(false);
-          setIsButtonDisabled3(false);
-        } else if (
-          response.data["status"]["ccs"] === false &&
-          response.data["status"]["ac"] === false &&
-          response.data["status"]["chademo"] === false
-        ) {
-          setIsButtonDisabled1(true);
-          setIsButtonDisabled2(true);
-          setIsButtonDisabled3(true);
-        }
+        const ccs = response.data["status"]["ccs"];
+        const ac = response.data["status"]["ac"];
+        const chademo = response.data["status"]["chademo"];
+
+        setIsButtonDisabled1(!ccs);
+        setIsButtonDisabled2(!ac);
+        setIsButtonDisabled3(!chademo);
 
         const update = {
           1: response.data["status"]["ccs"],

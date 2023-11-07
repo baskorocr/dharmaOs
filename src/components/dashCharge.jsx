@@ -36,7 +36,7 @@ function App() {
     socket.onmessage = (event) => {
       const jsonData = JSON.parse(event.data);
       setData(jsonData);
-      sendData(jsonData);
+
       if (jsonData["pilot"] === 7) {
         controlEme(navigate, sharedVariable);
       }
@@ -75,31 +75,6 @@ function App() {
       }
     };
   }, []);
-
-  function sendData(json) {
-    const minute = Math.floor(json["curr_ses_secs"] / 60);
-    const second = json["curr_ses_secs"] % 60;
-    const format =
-      minute.toString().padStart(2, "0") +
-      ":" +
-      second.toString().padStart(2, "0");
-    const data = {
-      idMachine: "MCN00000003",
-      kWh: parseFloat(json["curr_ses_Wh"] / 1000).toFixed(2),
-      amper: json["evsemaxc"],
-      time: format,
-      voltage: json["pv"],
-    };
-
-    axios
-      .post(apiMachine, data)
-      .then((response) => {
-        console.log("Response:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
 
   //set handle for onClick event button Stop
   const backHome1 = () => {
