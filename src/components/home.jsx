@@ -111,15 +111,9 @@ function App() {
 
   //function for Auth or Proccess starting PowerUp machine
   function Auth() {
-    const data = {
-      plug_type: type,
-      auth: true,
-      user: "user0815",
-    };
     axios
       .post(
-        process.env.REACT_APP_API_URL + "/api/outlets/" + type + "/coap/auth",
-        data
+        process.env.REACT_APP_API_URL + "/api/outlets/" + type + "/coap/auth"
       )
       .then((response) => {
         if (response.status === 200) {
@@ -141,7 +135,7 @@ function App() {
   const ClickButton1 = () => {
     if (plug1 === 1) {
       dispatch(setSharedVariable("ccs"));
-      Auth();
+      navigate("/payment");
     } else {
       dispatch(setSharedVariable("ccs"));
       navigate("/cek");
@@ -150,7 +144,7 @@ function App() {
   const ClickButton2 = () => {
     if (plug2 === 2) {
       dispatch(setSharedVariable("ac"));
-      Auth();
+      navigate("/payment");
     } else {
       dispatch(setSharedVariable("ac"));
       navigate("/cek");
