@@ -8,6 +8,8 @@ import controlEme from "./controlEme";
 import { useSelector } from "react-redux";
 
 function App() {
+  localStorage.removeItem("kWh");
+  localStorage.removeItem("user");
   //use url api in vsecc
   const apiUrl = process.env.REACT_APP_API_URL + "/api/webui/data";
   const urlAC = process.env.REACT_APP_API_URL + "/api/outlets/ac/state";
@@ -135,7 +137,7 @@ function App() {
   const ClickButton1 = () => {
     if (plug1 === 1) {
       dispatch(setSharedVariable("ccs"));
-      navigate("/payment");
+      navigate("/cek");
     } else {
       dispatch(setSharedVariable("ccs"));
       navigate("/cek");
@@ -144,7 +146,7 @@ function App() {
   const ClickButton2 = () => {
     if (plug2 === 2) {
       dispatch(setSharedVariable("ac"));
-      navigate("/payment");
+      navigate("/cek");
     } else {
       dispatch(setSharedVariable("ac"));
       navigate("/cek");

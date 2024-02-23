@@ -293,3 +293,84 @@ h3 {
   filter: contrast(50%);
   filter: drop-shadow(5px 5px 5px #5f17175e);
 }
+
+/* YourCustomStyles.css */
+
+/* Custom button style */
+
+.btn-custom2 {
+  background-color: #0c8542;
+  width: 900%;
+  height: 120px;
+  border: 2px solid #ffff;
+  margin-top: 6px;
+  color: #ffffff;
+  border-radius: 15px;
+}
+.btn-custom1 {
+  background-color: #0c8542;
+  width: 900%;
+  height: 90px;
+  border: 2px solid #ffff;
+  margin-top: 7px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+.btn-cancel {
+  background-color: #b81010;
+
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffff;
+  margin-top: 6px;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.btn-process {
+  background-color: #0c8542;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffff;
+  margin-top: 6px;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.paket {
+  margin-top: 50px;
+  width: 70%;
+}
+
+.line {
+  width: 10px;
+  height: 100px;
+  border: 3px solid #ffffff;
+  background-color: #ffffff;
+}
+
+.SimpleKeyboard {
+  width: 400px;
+
+  margin-bottom: 40px;
+}
+.inputUser {
+  height: 35px;
+  width: 320px;
+  border-radius: 10px #ffffff;
+  margin-bottom: 5%;
+  margin-top: -1%;
+}
+
+.btn-cancelPaket {
+  background-color: #b81010;
+  width: 900%;
+  height: 90px;
+  border: 2px solid #ffff;
+  margin-top: 7px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  font-size: 30px;
+}

@@ -37,7 +37,7 @@ function App() {
       .then((Response) => {
         console.log(Response);
         if (Response.data["phs"] === 2) {
-          navigate("/payment");
+          navigate("/inputUser");
         }
       })
       .catch((err) => {

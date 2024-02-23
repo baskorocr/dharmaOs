@@ -22,6 +22,7 @@ function Main() {
       Dataload();
     } else {
       const parse = JSON.parse(storedData);
+      console.log(parse.kWh[0]);
       setData(parse);
     }
 
@@ -54,9 +55,9 @@ function Main() {
       };
 
       const response = await axios.post(ApiUrl2, data, { headers });
-
-      if (response.data.success) {
-        const mcn = response.data.mcn;
+      console.log(response.data);
+      if (response.data) {
+        const mcn = response.data;
         localStorage.setItem("myData", JSON.stringify(mcn));
         console.log("Token Server:", mcn);
       } else {

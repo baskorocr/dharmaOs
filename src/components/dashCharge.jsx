@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import controlEme from "./controlEme";
 import "../Assets/index.css";
 import axios from "axios";
+import database from "../firebase";
+import { ref, set, push } from "firebase/database";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,7 +18,9 @@ function App() {
   const apiUrl =
     "ws://10.20.27.100/api/outlets/" + sharedVariable + "/statestream";
   const apiMachine = "http://10.20.27.150:8080/api/PostMonitoring";
+  const machine = JSON.parse(localStorage.getItem("myData"));
   const [data, setData] = useState({});
+  const rootRef = ref(database, "machine/" + process.env.REACT_APP_API_MCN);
 
   useEffect(() => {
     const handlePage = (e) => {
@@ -51,6 +55,19 @@ function App() {
         ":" +
         second.toString().padStart(2, "0");
       setFormatedTime(format);
+
+      //send Firebase monitoring System
+      set(rootRef, {
+        identity: machine.identity,
+        status: jsonData["EVRESSSOC"] === undefined ? 0 : jsonData["EVRESSSOC"],
+        ampere: jsonData["evsemaxc"] === undefined ? 0 : jsonData["evsemaxc"],
+        timeToFull:
+          jsonData["TimeToFull"] === undefined ? 0 : jsonData["TimeToFull"],
+        power:
+          jsonData["curr_ses_Wh"] === "NaN"
+            ? 0
+            : parseFloat(data["curr_ses_Wh"] / 1000).toFixed(2),
+      });
     };
 
     socket.onclose = (event) => {
