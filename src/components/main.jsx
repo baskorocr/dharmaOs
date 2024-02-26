@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs"; // Import bcryptjs directly
+import Swal from "sweetalert2";
 
 function Main() {
   const navigate = useNavigate();

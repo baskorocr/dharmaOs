@@ -14,7 +14,7 @@ function Payment() {
 
   const navigate = useNavigate();
   const sharedVariable = useSelector((state) => state.sharedVariable);
-  const kWh = localStorage.getItem("kWh");
+
   console.log(sharedVariable);
 
   console.log(apiUrl1, apiUrl2, apiKey);
@@ -27,8 +27,8 @@ function Payment() {
     const data = {
       nomerHp: "089654825055",
       idMachine: IdMcn,
-      kWh: kWh,
-      tarifkWh: "1800",
+      kWh: "12",
+      tarifkWh: "200000",
     };
 
     const snapSrcUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
