@@ -12,7 +12,6 @@ function App() {
   const parse = JSON.parse(storedData);
   const url = process.env.REACT_APP_API_URL2;
 
-  const buttonNames = parse.kWh;
   const [inputValue, setInputValue] = useState("");
   const number = inputValue.toString().substring(4, 12);
   const user = localStorage.getItem("user");
