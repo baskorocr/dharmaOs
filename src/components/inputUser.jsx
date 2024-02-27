@@ -63,9 +63,12 @@ function App() {
   const cek = async () => {
     if (user == null) {
       localStorage.setItem("user", extract);
+      localStorage.setItem("number", inputValue);
     } else {
       localStorage.removeItem("user");
+      localStorage.removeItem("number");
       localStorage.setItem("user", extract);
+      localStorage.setItem("number", inputValue);
     }
 
     const postData = {

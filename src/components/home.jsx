@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 function App() {
   localStorage.removeItem("kWh");
   localStorage.removeItem("user");
+  localStorage.removeItem("number");
   //use url api in vsecc
   const apiUrl = process.env.REACT_APP_API_URL + "/api/webui/data";
   const urlAC = process.env.REACT_APP_API_URL + "/api/outlets/ac/state";

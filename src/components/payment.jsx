@@ -11,6 +11,10 @@ function Payment() {
   const IdMcn = process.env.REACT_APP_API_MCN;
   const storedData = localStorage.getItem("myData");
   const parse = JSON.parse(storedData);
+  const kWh = JSON.parse(localStorage.getItem("kWh"));
+  const number = localStorage.getItem("number");
+  console.log(kWh);
+  console.log(number);
 
   const navigate = useNavigate();
   const sharedVariable = useSelector((state) => state.sharedVariable);
@@ -25,10 +29,10 @@ function Payment() {
 
   function showSnap() {
     const data = {
-      nomerHp: "089654825055",
+      nomerHp: number,
       idMachine: IdMcn,
-      kWh: "12",
-      tarifkWh: "200000",
+      kWh: kWh,
+      tarifkWh: parse.tarif_kWh,
     };
 
     const snapSrcUrl = "https://app.sandbox.midtrans.com/snap/snap.js";

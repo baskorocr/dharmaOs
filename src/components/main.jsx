@@ -57,12 +57,19 @@ function Main() {
 
       const response = await axios.post(ApiUrl2, data, { headers });
       console.log(response.data);
-      if (response.data) {
+      if (response.data.tokenServer != null) {
+        localStorage.removeItem("mydata");
         const mcn = response.data;
         localStorage.setItem("myData", JSON.stringify(mcn));
         console.log("Token Server:", mcn);
+        setData(true);
       } else {
-        console.error("Server response indicates failure.");
+        Swal.fire({
+          icon: "error",
+          title: "Data Configuration Null",
+          text: "Check Configuration Seller in Website",
+          showConfirmButton: false,
+        });
       }
     } catch (error) {
       console.error("Error:", error);
