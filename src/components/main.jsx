@@ -64,12 +64,7 @@ function Main() {
         console.log("Token Server:", mcn);
         setData(true);
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Data Configuration Null",
-          text: "Check Configuration Seller in Website",
-          showConfirmButton: false,
-        });
+        navigate("/cekConfig");
       }
     } catch (error) {
       console.error("Error:", error);

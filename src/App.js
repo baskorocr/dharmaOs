@@ -17,6 +17,7 @@ import Payment from "./components/payment.jsx";
 import Paket from "./components/paket.jsx";
 import Test from "./components/test";
 import InputUser from "./components/inputUser";
+import Configuration from "./components/cekConfig";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/test" element={<Test />} />
+            <Route path="/cekConfig" element={<Configuration />} />
             <Route path="/" element={<Main />} />
             <Route path="/home" element={<Home />} />
             <Route path="/cek" element={<Cek />} />
