@@ -9,60 +9,60 @@ function App() {
   //handler api
   const sharedVariable = useSelector((state) => state.sharedVariable);
 
-  useEffect(() => {
-    fetchData();
-    const handlePage = (e) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
-    };
-    window.addEventListener("wheel", handlePage, { passive: false });
-    const interval = setInterval(fetchData, 1000);
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener("wheel", handlePage);
-    };
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  //   const handlePage = (e) => {
+  //     if (e.ctrlKey) {
+  //       e.preventDefault();
+  //     }
+  //   };
+  //   window.addEventListener("wheel", handlePage, { passive: false });
+  //   const interval = setInterval(fetchData, 1000);
+  //   return () => {
+  //     clearInterval(interval);
+  //     window.removeEventListener("wheel", handlePage);
+  //   };
+  // }, []);
 
-  function fetchData() {
-    if (sharedVariable === "" || sharedVariable === "ac") {
-      defaultGetEme();
-    } else if (sharedVariable === "ccs") {
-      OutletEme();
-    }
-  }
+  // function fetchData() {
+  //   if (sharedVariable === "" || sharedVariable === "ac") {
+  //     defaultGetEme();
+  //   } else if (sharedVariable === "ccs") {
+  //     OutletEme();
+  //   }
+  // }
 
-  function defaultGetEme() {
-    const apiUrl = process.env.REACT_APP_API_URL + "/api/system/iostate"; // Assuming this API returns a single product
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        if (response.data["io"][49]["value"] === 1) {
-          navigate("/home");
-        }
-      })
-      .catch((error) => {
-        navigate("/error");
-      });
-  }
+  // function defaultGetEme() {
+  //   const apiUrl = process.env.REACT_APP_API_URL + "/api/system/iostate"; // Assuming this API returns a single product
+  //   axios
+  //     .get(apiUrl)
+  //     .then((response) => {
+  //       if (response.data["io"][49]["value"] === 1) {
+  //         navigate("/home");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       navigate("/error");
+  //     });
+  // }
 
-  function OutletEme() {
-    const apiUrl =
-      process.env.REACT_APP_API_URL +
-      "/api/outlets/" +
-      sharedVariable +
-      "/state"; // Assuming this API returns a single product
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        if (response.data["evsestat"] === 1) {
-          navigate("/home");
-        }
-      })
-      .catch((error) => {
-        navigate("/error");
-      });
-  }
+  // function OutletEme() {
+  //   const apiUrl =
+  //     process.env.REACT_APP_API_URL +
+  //     "/api/outlets/" +
+  //     sharedVariable +
+  //     "/state"; // Assuming this API returns a single product
+  //   axios
+  //     .get(apiUrl)
+  //     .then((response) => {
+  //       if (response.data["evsestat"] === 1) {
+  //         navigate("/home");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       navigate("/error");
+  //     });
+  // }
 
   return (
     <div className="animate__animated animate__fadeIn top">
@@ -84,9 +84,14 @@ function App() {
         />
       </div>
 
-      <h1 className={"d-flex justify-content-center mt-2"}>
-        Please insert Configuration in Website
+      <h1
+        className={
+          "d-flex text-center justify-content-center align-item-center mt-2"
+        }
+      >
+        Please insert Configuration
       </h1>
+      <h1 className="text-center">in Website and Restart Machine</h1>
     </div>
   );
 }
