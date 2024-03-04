@@ -19,6 +19,7 @@ function Main() {
     const interval = setInterval(fetchData, 1000);
 
     const storedData = localStorage.getItem("myData");
+    console.log(storedData);
     if (storedData == null) {
       Dataload();
     } else {

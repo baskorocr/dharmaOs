@@ -12,8 +12,11 @@ function App() {
 
   const handleButtonClick = (id) => {
     // Handle button click based on id or other conditions
-    console.log(id);
-    const a = Math.round((id * 1000) / (380 * 1.73 * 0.85));
+    console.log("kWh:" + id);
+    const kw = id * 60;
+    console.log("kW: " + kw);
+    const a = Math.round((kw * 1000) / (380 * 1.73 * 0.85));
+    console.log("Ampere: " + a);
     localStorage.setItem("kWh", id);
     const postData = {
       ccs: {
@@ -23,7 +26,7 @@ function App() {
         stack: {
           evseId: "FR*A23*E45B*69C",
           imd: "bender",
-          maxKW: id,
+          maxKW: id * 60,
           maxA: a,
         },
         intcc: {

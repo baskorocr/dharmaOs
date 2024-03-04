@@ -21,7 +21,7 @@ function App() {
   const machine = JSON.parse(localStorage.getItem("myData"));
   const [data, setData] = useState({});
   const rootRef = ref(database, "machine/" + process.env.REACT_APP_API_MCN);
-
+  const kWh = JSON.parse(localStorage.getItem("kWh"));
   useEffect(() => {
     const handlePage = (e) => {
       if (e.ctrlKey) {
@@ -58,6 +58,7 @@ function App() {
 
       //send Firebase monitoring System
       set(rootRef, {
+        kWh: kWh,
         identity: machine.identity,
         status: jsonData["EVRESSSOC"] === undefined ? 0 : jsonData["EVRESSSOC"],
         ampere: jsonData["evsemaxc"] === undefined ? 0 : jsonData["evsemaxc"],
@@ -95,6 +96,14 @@ function App() {
 
   //set handle for onClick event button Stop
   const backHome1 = () => {
+    set(rootRef, {
+      kWh: 0,
+      identity: machine.identity,
+      status: 0,
+      ampere: 0,
+      timeToFull: 0,
+      power: 0,
+    });
     stopCharge(sharedVariable, navigate); //call function file stopCharge
   };
 
