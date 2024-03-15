@@ -64,11 +64,10 @@ function App() {
         ampere: jsonData["evsemaxc"] === undefined ? 0 : jsonData["evsemaxc"],
         timeToFull:
           jsonData["TimeToFull"] === undefined ? 0 : jsonData["TimeToFull"],
-        power:
-          jsonData["curr_ses_Wh"] === "NaN"
-            ? 0
-            : parseFloat(data["curr_ses_Wh"] / 1000).toFixed(2),
+        power: parseFloat(data["curr_ses_Wh"] / 1000).toFixed(2),
       });
+
+      finish();
     };
 
     socket.onclose = (event) => {
@@ -106,6 +105,13 @@ function App() {
     });
     stopCharge(sharedVariable, navigate); //call function file stopCharge
   };
+
+  function finish() {
+    const DatakWh = parseFloat(data["curr_ses_Wh"] / 1000).toFixed(2);
+    if (DatakWh === kWh) {
+      stopCharge(sharedVariable, navigate);
+    }
+  }
 
   //css style for update data percent in dashboard
   const style1 = {

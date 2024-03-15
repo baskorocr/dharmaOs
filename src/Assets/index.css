@@ -328,6 +328,18 @@ h3 {
   border-radius: 5px;
 }
 
+.btn-full {
+  background-color: #ffc700;
+
+  width: 350px;
+  height: 50px;
+  border: 2px solid #ffff;
+  margin-top: 1px;
+  margin-bottom: 10px;
+  color: #000000;
+  border-radius: 5px;
+}
+
 .btn-process {
   background-color: #0c8542;
   width: 150px;

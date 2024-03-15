@@ -60,6 +60,7 @@ function Main() {
       console.log(response.data);
       if (response.data.tokenServer != null) {
         localStorage.removeItem("mydata");
+        localStorage.removeItem("kWh");
         const mcn = response.data;
         localStorage.setItem("myData", JSON.stringify(mcn));
         console.log("Token Server:", mcn);
